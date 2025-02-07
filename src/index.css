@@ -1,0 +1,5 @@
+ @import "tailwindcss";
+
+ #bannerDotId .slick-active .bannerDotliId {
+  color: #018496;
+}
