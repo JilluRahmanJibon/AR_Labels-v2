@@ -1,13 +1,12 @@
 // src/components/Navbar.jsx
 import { useState } from "react";
 import { Navigate, NavLink, useLocation } from "react-router-dom";
-import { Bars3Icon } from "@heroicons/react/24/outline";
-import { FaPowerOff } from "react-icons/fa6";
+import { FaChevronDown, FaPowerOff } from "react-icons/fa6";
 import logo from "../../../Assets/logo3.png";
 import { RxCross2 } from "react-icons/rx";
-import { ChevronDownIcon } from "@heroicons/react/24/outline";
 import { ImHome } from "react-icons/im";
 import { GoChevronRight } from "react-icons/go";
+import { FaTimes } from "react-icons/fa";
 
 const AdminDashboardNav = ({ data }) => {
 	const [showLeftNav, setshowLeftNav] = useState(true);
@@ -40,11 +39,11 @@ const AdminDashboardNav = ({ data }) => {
 			subItems: [
 				{
 					name: "All Product",
-					path: "/dashboard/product-solutions/all-products",
+					path: "/superAdmin/product-solutions/all-products",
 				},
 				{
 					name: "Add Product",
-					path: "/dashboard/product-solutions/add-product",
+					path: "/superAdmin/product-solutions/add-product",
 				},
 			],
 		},
@@ -59,8 +58,8 @@ const AdminDashboardNav = ({ data }) => {
 		{
 			name: "Careers",
 			subItems: [
-				{ name: "Available Positions", path: "/available_positions" },
-				{ name: "Apply Online", path: "/apply_online" },
+				{ name: "Available Positions", path: "/careers/available_positions" },
+				{ name: "Apply Online", path: "/careers/apply-online" },
 			],
 		},
 	];
@@ -96,7 +95,7 @@ const AdminDashboardNav = ({ data }) => {
 								} h-[22px] w-[22px] ml-[1rem]  cursor-pointer text-gray-500`}
 							/>
 
-							<Bars3Icon
+							<FaTimes
 								onClick={() => setshowLeftNav(true)}
 								className={`${
 									showLeftNav
@@ -181,7 +180,7 @@ const AdminDashboardNav = ({ data }) => {
 															: "text-gray-700 hover:text-[#018496] "
 													}`}>
 													{item.name}
-													<ChevronDownIcon
+													<FaChevronDown
 														className={`h-[14px] w-[14px] transition-transform ${
 															openDropdown === item.name
 																? "transform rotate-180"

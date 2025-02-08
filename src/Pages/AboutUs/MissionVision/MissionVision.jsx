@@ -1,5 +1,6 @@
 import  { lazy, Suspense } from "react";
 import DynamicBanner from "../../../Shared/DynamicBanner/DynamicBanner";
+import Spinner from "../../../components/Loader/Spinner";
 
 
 // Lazy-load MissionVisionDetails
@@ -15,7 +16,7 @@ function MissionVision ()
       <DynamicBanner webTittle bg="https://www.arltl.com/web-cms-arltl/uploads/about-banner.jpg" />
 
       {/* Mission & Vision Section */}
-      <Suspense fallback={<div>Loading...</div>}>
+      <Suspense fallback={<Spinner/>}>
         <MissionVisionDetails />
       </Suspense>
     </main>

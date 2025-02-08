@@ -139,7 +139,7 @@ const AdminDashboardAllProduct = () => {
 
 									<div className="flex justify-center pb-[10px] pt-[15px]">
 										<Link
-											to={`/dashboard/product-solutions/update/${key?._id}`}>
+											to={`/superAdmin/product-solutions/update/${key?._id}`}>
 											<button className="text-white [@media(min-width:450px)]:text-[14px] text-[13px] bg-green-500 [@media(min-width:450px)]:py-2 py-[8px] [@media(min-width:450px)]:px-6 px-[20px] focus:outline-none rounded-[5px] mr-[15px]">
 												Edit
 											</button>

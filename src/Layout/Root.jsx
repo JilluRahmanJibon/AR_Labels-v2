@@ -3,6 +3,8 @@ import { Outlet } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import Spinner from "../Components/Loader/Spinner";
 import { BaseURL } from "../utils/BaseURL";
+import GoToTop from "../utils/GoToTop";
+import verifyToken from "../utils/verifyToken";
 
 const Navbar = React.lazy(() => import("../Shared/Navbar/Navbar"));
 const Footer = React.lazy(() => import("../Shared/Footer/Footer"));
@@ -14,22 +16,25 @@ const fetchCategories = async () => {
 };
 
 const Root = () => {
-	const { data, error, isLoading } = useQuery({
+	const token = localStorage.getItem("authToken");
+	const { data, isLoading } = useQuery({
 		queryKey: ["/categories"],
 		queryFn: fetchCategories,
 	});
 
-	// Render spinner while data is loading
-	// if (isLoading) return <Spinner />;
+	let user;
+	if (token) {
+		user = verifyToken(token);
+	}
 
-	// Render error message if fetching data fails
-	// if (error) return <div>Error loading data: {error.message}</div>;
+	// Render spinner while data is loading
+	if (isLoading) return <Spinner />;
 
 	return (
 		<main>
 			<Suspense fallback={<Spinner />}>
 				<section>
-					<Navbar data={data || []} />
+					<Navbar data={data?.data || []} user={user} />
 				</section>
 			</Suspense>
 
@@ -39,6 +44,7 @@ const Root = () => {
 
 			<Suspense fallback={<Spinner />}>
 				<section>
+					<GoToTop />
 					<Footer />
 				</section>
 			</Suspense>

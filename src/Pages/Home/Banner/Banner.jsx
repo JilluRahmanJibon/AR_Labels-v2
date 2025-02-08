@@ -8,7 +8,7 @@ import { GoDotFill } from "react-icons/go";
 const NextButton = memo(({ onClick }) => {
 	return (
 		<div
-			className="bg-[#dcdcdc] xl:w-[30px] w-[20px] xl:h-[80px] h-[50px] absolute top-[40%] right-0 hidden sm:flex items-center justify-center cursor-pointer z-10 text-black hover:text-[#018496] transition duration-300"
+			className="bg-[#dcdcdc]  w-[30px] h-[80px] absolute top-[40%] right-0 hidden sm:flex items-center  cursor-pointer z-10 text-black hover:text-[#018496] transition duration-300"
 			onClick={onClick}>
 			<MdKeyboardArrowRight className="text-[27px]" />
 		</div>
@@ -21,7 +21,7 @@ NextButton.displayName = "NextButton"; // ✅ Fix for ESLint warning
 const PrevButton = memo(({ onClick }) => {
 	return (
 		<div
-			className="bg-[#dcdcdc] xl:w-[30px] w-[20px] xl:h-[80px] h-[50px] absolute top-[40%] left-0 hidden sm:flex items-center justify-center cursor-pointer z-10 text-black hover:text-[#018496] transition duration-300"
+			className="bg-[#dcdcdc] w-[30px] h-[80px]  absolute top-[40%] left-0 hidden sm:flex items-center  cursor-pointer z-10 text-black hover:text-[#018496] transition duration-300"
 			onClick={onClick}>
 			<MdKeyboardArrowLeft className="text-[27px]" />
 		</div>

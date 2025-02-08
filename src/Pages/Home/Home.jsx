@@ -22,7 +22,7 @@ const Home = () => {
 			{/* service section  */}
 			<OurService />
 			{/* Manufacturing  */}
-			<Manufacturing />
+			<Manufacturing  />
 			{/* WhyChooseUs */}
 			<WhyChooseUs />
 			{/* Portfolio  */}

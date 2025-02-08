@@ -1,5 +1,6 @@
 import   { Suspense, lazy } from "react";
 import DynamicBanner from "../../../Shared/DynamicBanner/DynamicBanner";
+import Spinner from "../../../components/Loader/Spinner";
 
 
 // Lazy load components
@@ -9,16 +10,19 @@ const OurCompanyDetails = lazy(() => import("./OurCompanyDetails/OurCompanyDetai
 function OurCompany ()
 {
   return (
-    <main>
-      {/*  banner section  */}
-      <DynamicBanner webTittle={true} bg="https://www.arltl.com/web-cms-arltl/uploads/about-banner.jpg" />
-      {/*  skils and company details sections */}
-      <Suspense fallback={<div>Loading...</div>}>
-        <AboutSkils />
-        <OurCompanyDetails />
-      </Suspense>
-    </main>
-  );
+		<main>
+			{/*  banner section  */}
+			<DynamicBanner
+				webTittle={true}
+				bg="https://www.arltl.com/web-cms-arltl/uploads/about-banner.jpg"
+			/>
+			{/*  skils and company details sections */}
+			<Suspense fallback={<Spinner/>}>
+				<AboutSkils />
+				<OurCompanyDetails />
+			</Suspense>
+		</main>
+	);
 }
 
 export default OurCompany;

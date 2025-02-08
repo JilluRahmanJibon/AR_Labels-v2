@@ -1,5 +1,7 @@
 import React, { useMemo } from "react";
 import Marquee from "react-fast-marquee";
+import PropTypes from "prop-types";
+import { motion } from "framer-motion"; // Import Framer Motion
 
 // Import brand logos only once at the top
 import brandLogo1 from "../../../Assets/brand/brandLogo4.png";
@@ -29,30 +31,52 @@ const brandLogoData = [
 	{ id: 11, image: brandLogo11 },
 ];
 
+// Memoized LogoItem Component
 const LogoItem = React.memo(({ keyData }) => {
 	return (
 		<div
-			className={`[@media(min-width:625px)]:w-[65px] [@media(min-width:400px)]:w-[55px] w-[40px] [@media(min-width:625px)]:mr-[45px] [@media(min-width:400px)]:mr-[35px] mr-[25px] shadow-[0px_0px_6px_0px_#0000000f]`}>
+			className="[@media(min-width:625px)]:w-[65px] [@media(min-width:400px)]:w-[55px] w-[40px] 
+		[@media(min-width:625px)]:mr-[45px] [@media(min-width:400px)]:mr-[35px] mr-[25px] 
+		shadow-[0px_0px_6px_0px_#0000000f]">
 			<img src={keyData.image} className="w-full" alt="brand logo" />
 		</div>
 	);
 });
 
+// Add display name for debugging
+LogoItem.displayName = "LogoItem";
+
+// Add PropTypes validation
+LogoItem.propTypes = {
+	keyData: PropTypes.shape({
+		id: PropTypes.number.isRequired,
+		image: PropTypes.string.isRequired,
+	}).isRequired,
+};
+
 const Branding = () => {
+	// Memoized logo items
 	const logoItems = useMemo(
 		() => brandLogoData.map(item => <LogoItem key={item.id} keyData={item} />),
-		[]
+		[brandLogoData]
 	);
 
 	return (
 		<main>
-			<section
-				data-aos="fade-up"
+			<motion.section
+				whileInView={{ opacity: 1, scale: 1 }}
+				initial={{ opacity: 0, scale: 0.8 }}
+				transition={{ duration: 0.6 }}
+				viewport={{ once: false }}
 				className="text-gray-600 body-font GeologicaFont">
-				<div className="xl:w-[1230px] w-[100%] [@media(min-width:400px)]:px-5 px-0 [@media(min-width:400px)]:pt-[2rem] pt-[1.5rem] [@media(min-width:625px)]:pb-[2rem] pb-[0.5rem] mx-auto">
+				<div
+					className="xl:w-[1230px] w-[100%] [@media(min-width:400px)]:px-5 px-0 
+				[@media(min-width:400px)]:pt-[2rem] pt-[1.5rem] [@media(min-width:625px)]:pb-[2rem] pb-[0.5rem] mx-auto">
 					<div className="w-[95%] mx-auto flex flex-wrap justify-center items-center">
 						<div className="[@media(min-width:600px)]:w-[550px] w-[100%] text-center md:m-0 m-auto">
-							<h1 className="sm:!text-[28px] [@media(min-width:460px)]:text-[26px] text-[20px] font-semibold text-center text-gray-800 mb-[8px]">
+							<h1
+								className="sm:!text-[28px] [@media(min-width:460px)]:text-[26px] text-[20px] font-semibold 
+							text-center text-gray-800 mb-[8px]">
 								Sustainable branding <br />
 								from stitch to store
 							</h1>
@@ -65,18 +89,26 @@ const Branding = () => {
 								As your branding partner, we’ll design, develop and deliver your
 								products globally through an infrastructure that benefits you.
 							</p>
-							<button className="md:text-[15px] sm:text-[14px] text-[13px] text-white hover:text-[#018496]  bg-[#018496]  border-[2px] border-primary [@media(min-width:400px)]:py-2 py-[7px] [@media(min-width:400px)]:px-6 px-[18px] focus:outline-none hover:bg-transparent rounded-[50px] transition-[0.3s] mt-[5px]">
+							<button
+								className="md:text-[15px] sm:text-[14px] text-[13px] text-white hover:text-[#018496] 
+							bg-[#018496] border-[2px] border-primary [@media(min-width:400px)]:py-2 py-[7px] 
+							[@media(min-width:400px)]:px-6 px-[18px] focus:outline-none hover:bg-transparent rounded-[50px] 
+							transition-[0.3s] mt-[5px]">
 								Our sustainability commitment
 							</button>
 						</div>
 					</div>
 					<div className="w-full [@media(min-width:400px)]:h-[110px] h-[90px] flex items-center mt-[1rem] relative">
 						<Marquee className="z-0">{logoItems}</Marquee>
-						<div className="[@media(min-width:550px)]:w-[100px] [@media(min-width:400px)]:w-[80px] w-[50px] [@media(min-width:400px)]:h-[110px] h-[90px] absolute top-0 left-0 bg-gradient-to-r from-[#fff] z-[10]"></div>
-						<div className="[@media(min-width:550px)]:w-[100px] [@media(min-width:400px)]:w-[80px] w-[50px] [@media(min-width:400px)]:h-[110px] h-[90px] absolute top-0 right-0 bg-gradient-to-l from-[#fff] z-[10]"></div>
+						<div
+							className="[@media(min-width:550px)]:w-[100px] [@media(min-width:400px)]:w-[80px] w-[50px] 
+						[@media(min-width:400px)]:h-[110px] h-[90px] absolute top-0 left-0 bg-gradient-to-r from-[#fff] z-[10]"></div>
+						<div
+							className="[@media(min-width:550px)]:w-[100px] [@media(min-width:400px)]:w-[80px] w-[50px] 
+						[@media(min-width:400px)]:h-[110px] h-[90px] absolute top-0 right-0 bg-gradient-to-l from-[#fff] z-[10]"></div>
 					</div>
 				</div>
-			</section>
+			</motion.section>
 		</main>
 	);
 };

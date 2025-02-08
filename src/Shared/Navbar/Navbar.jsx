@@ -1,28 +1,16 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { NavLink, useLocation } from "react-router-dom";
 import { FaBars, FaTimes, FaChevronDown } from "react-icons/fa";
 import { motion, AnimatePresence } from "framer-motion";
 import { menuItems, menuItems2 } from "./NavItems";
-import AOS from "aos";
-import "aos/dist/aos.css";
 import logo from "../../Assets/logo3.png";
-import verifyToken from "../../utils/verifyToken";
 import NavTop from "./NavTop";
 
-const Navbar = () => {
+const Navbar = ({ data, user }) => {
 	const [menuOpen, setMenuOpen] = useState(false);
 	const [activeDropdown, setActiveDropdown] = useState(null);
 	const [activeLink, setActiveLink] = useState({ parent: null, child: null });
 	const location = useLocation(); // Get current location/pathname
-	const token = localStorage.getItem("authToken");
-	let user;
-	if (token) {
-		user = verifyToken(token);
-	}
-
-	useEffect(() => {
-		AOS.init({ duration: 500, easing: "ease-in-out" });
-	}, []);
 
 	const handleLinkClick = (parentTitle, subItemTitle = null) => {
 		if (subItemTitle) {
@@ -32,6 +20,21 @@ const Navbar = () => {
 		}
 	};
 
+
+	 const oldMenu = data?.map(item => ({
+			title: item.title,
+			path: `/products/${item._id}`,
+		}));
+
+		const updatedMenuItems = menuItems?.map(item => {
+			if (item.title === "Product & Solutions") {
+				return {
+					...item,
+					subItems: oldMenu,
+				};
+			}
+			return item;
+		});
 	return (
 		<nav>
 			<NavTop user={user} />
@@ -39,7 +42,7 @@ const Navbar = () => {
 				<div className="max-w-6xl w-full mx-auto  lg:px-8 py-3 flex justify-between items-center">
 					{/* Left Side Menu (menuItems) */}
 					<div className="hidden lg:flex space-x-6 items-center">
-						{menuItems.map((item, index) => (
+						{updatedMenuItems.map((item, index) => (
 							<div
 								key={index}
 								className={`relative ${
@@ -139,7 +142,7 @@ const Navbar = () => {
 							</div>
 						))}
 						<NavLink
-							to={"/contactUs"}
+							to={"/contact-Us"}
 							className="border-[2px] border-primary bg-[#018496] hover:bg-transparent cursor-pointer outline-none text-white hover:text-[#018496] font-[500] text-sm px-[20px] py-[8px] rounded-[50px] transition-[0.3s] ml-[10px] mr-[5px]">
 							Contact Us
 						</NavLink>
@@ -162,7 +165,7 @@ const Navbar = () => {
 								animate={{ opacity: 1, y: 0 }}
 								exit={{ opacity: 0, y: -10 }}
 								className="lg:hidden absolute left-0 mt-3 w-full bg-white shadow-md py-4">
-								{menuItems.concat(menuItems2).map((item, index) => (
+								{updatedMenuItems.concat(menuItems2).map((item, index) => (
 									<div key={index} className="px-4 py-2 border-b">
 										{/* Toggle active dropdown on click for mobile */}
 										<button

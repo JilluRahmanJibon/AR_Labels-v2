@@ -1,151 +1,69 @@
-import   {  useState } from "react";
+const AvailablePositionsDetails = () => {
+	const data = [];
 
-const AvailablePositionsDetails = () =>
-{
-  const [ availablePosition, setavailablePosition ] = useState(false);
-  const AvailablePositionsData = [
-    {
-      id: 1,
-      tittle: "SL",
-      childlist: [ { id: 1, description: "01" } ],
-      width: [
-        { id: 1, size: "240px" },
-        { id: 2, size: "210px" },
-      ],
-    },
-    {
-      id: 2,
-      tittle: "Job Tittle",
-      childlist: [ { id: 1, description: "Managing Director" } ],
-      width: [
-        { id: 1, size: "360px" },
-        { id: 2, size: "330px" },
-      ],
-    },
-    {
-      id: 3,
-      tittle: "No. Of Positions",
-      childlist: [ { id: 1, description: "10" } ],
-      width: [
-        { id: 1, size: "360px" },
-        { id: 2, size: "330px" },
-      ],
-    },
-    {
-      id: 4,
-      tittle: "Deadline",
-      childlist: [ { id: 1, description: "25-12-2024" } ],
-      width: [
-        { id: 1, size: "240px" },
-        { id: 2, size: "210px" },
-      ],
-    },
-  ];
+	return (
+		<div className="bg-[#fff] pb-10 GeologicaFont">
+			<main className="xl:w-[1240px] w-full mx-auto py-[3rem] px-5 overflow-hidden">
+				<div className="w-full text-center text-black relative z-10 sm:pb-[25px] pb-[15px]">
+					<h1 className="text-[19px] sm:text-[25px] md:text-[27px] lg:text-[30px] font-semibold">
+						Available Job Positions
+					</h1>
+					<div className="flex items-center mt-[5px] justify-center">
+						<div className="w-[18px] h-[2px] sm:w-[21px] sm:h-[3px] bg-[#FA0472] inline-flex"></div>
+						<div className="w-[19px] h-[5px] sm:w-[22px] sm:h-[6px] mx-[5px] bg-[#018496] inline-flex"></div>
+						<div className="w-[18px] h-[2px] sm:w-[21px] sm:h-[3px] bg-[#FA0472] inline-flex"></div>
+					</div>
+				</div>
 
+				{/* Display Available Positions Table */}
+				<div className="overflow-x-auto shadow-[0px_0px_6px_0px_#c6c6c6]">
+					<table className="min-w-full">
+						<thead>
+							<tr className="bg-[#018496] text-white">
+								<th className="py-[15px] text-left px-[20px]">SL</th>
+								<th className="py-[15px] text-left px-[20px]">Job Title</th>
+								<th className="py-[15px] text-left px-[20px]">
+									No. Of Positions
+								</th>
+								<th className="py-[15px] text-left px-[20px]">Deadline</th>
+							</tr>
+						</thead>
+						<tbody>
+							{data?.length > 0 && (
+								<>
+									{data.map((position, index) => (
+										<tr
+											key={position.id}
+											className={`${index % 2 === 0 ? "bg-[#f9f9f9]" : ""}`}>
+											<td className="py-[15px] text-left px-[20px]">
+												{position.id}
+											</td>
+											<td className="py-[15px] text-left px-[20px]">
+												{position.position}
+											</td>
+											<td className="py-[15px] text-left px-[20px]">
+												{position.avaPosition}
+											</td>
+											<td className="py-[15px] text-left px-[20px]">
+												{position.deadline}
+											</td>
+										</tr>
+									))}
+								</>
+							)}
+						</tbody>
+					</table>
 
-  return (
-    <div className="bg-[#fff] GeologicaFont">
-      <main className="xl:w-[1240px] w-[100%] mx-auto  py-[3rem] px-5  overflow-hidden">
-        <div className="w-full text-center text-black relative z-10 sm:pb-[25px] pb-[15px]">
-          <h1 className="[@media(min-width:800px)]:text-[30px] [@media(min-width:600px)]:text-[27px] [@media(min-width:500px)]:text-[25px] [@media(min-width:400px)]:text-[22px] text-[19px] font-semibold">
-            Available Job Positions
-          </h1>
-          <div className="flex items-center mt-[5px] justify-center">
-            <div className="[@media(min-width:420px)]:w-[21px] w-[18px] [@media(min-width:420px)]:h-[3px] h-[2px] bg-[#FA0472] inline-flex"></div>
-            <div className="[@media(min-width:420px)]:w-[22px] w-[19px] [@media(min-width:420px)]:h-[6px] h-[5px] mx-[5px] bg-[#018496] inline-flex"></div>
-            <div className="[@media(min-width:420px)]:w-[21px] w-[18px] [@media(min-width:420px)]:h-[3px] h-[2px] bg-[#FA0472] inline-flex"></div>
-          </div>
-        </div>
-
-        {/* No Available Position */}
-        <main
-          className={`max-h-[${ AvailablePositionsData[ 0 ].childlist.length * 55 + 75
-            }] overflow-x-auto flex [@media(min-width:1100px)]:text-[15px] text-[14px] shadow-[0px_0px_6px_0px_#c6c6c6]`}
-        >
-          {AvailablePositionsData.map((key) =>
-          {
-            return (
-              <div
-                key={key.id}
-                className={`[@media(min-width:1100px)]:min-w-[${ key.width[ 0 ].size
-                  }] min-w-[${ key.width[ 1 ].size }]  ${ availablePosition ? "" : "hidden"
-                  }`}
-              >
-                {/* Tittle */}
-                <div className="w-full [@media(min-width:1100px)]:text-[16px] text-[15px] bg-[#018496] text-white border-r-[1px] border-r-[#fff]">
-                  <p className="pl-[20px] py-[15px] font-[500] text-white">
-                    {key.tittle}{" "}
-                  </p>
-                </div>
-                {key.childlist.map((key2) =>
-                {
-                  return (
-                    <p
-                      key={key.id}
-                      className={`w-[100%] h-[54px] border-r-[1px] border-r-[#00000038] ${ key2.id > 1 ? "" : "border-b-[1px] border-b-[#00000038]"
-                        } px-[20px] py-[15px]`}
-                    >
-                      {key2.description}
-                    </p>
-                  );
-                })}
-              </div>
-            );
-          })}
-        </main>
-        {/* No Position Available */}
-        <main
-          className={`${ availablePosition ? "hidden" : "flex"
-            } max-h-[130px] overflow-x-auto [@media(min-width:1100px)]:text-[15px] text-[14px] shadow-[0px_0px_6px_0px_#c6c6c6] relative`}
-        >
-          <div className="[@media(min-width:1100px)]:min-w-[240px] min-w-[210px]">
-            {/* Tittle */}
-            <div className="w-full [@media(min-width:1100px)]:text-[16px] text-[15px] bg-[#018496] text-white border-r-[1px] border-r-[#fff]">
-              <p className="pl-[20px] py-[15px] font-[500] text-white">SL.</p>
-            </div>
-            {/* `````` */}
-            <p className="w-[100%] h-[54px] border-r-[1px] border-r-[#00000038] px-[20px] py-[15px]"></p>
-          </div>
-          <div className="[@media(min-width:1100px)]:min-w-[360px] min-w-[330px]">
-            {/* Tittle */}
-            <div className="w-full [@media(min-width:1100px)]:text-[16px] text-[15px] bg-[#018496] text-white border-r-[1px] border-r-[#fff]">
-              <p className="pl-[20px] py-[15px] font-[500] text-white">
-                Job Tittle
-              </p>
-            </div>
-            {/* `````` */}
-            <p className="w-[100%] h-[54px] border-r-[1px] border-r-[#00000038] px-[20px] py-[15px]"></p>
-          </div>
-          <div className="[@media(min-width:1100px)]:min-w-[360px] min-w-[330px]">
-            {/* Tittle */}
-            <div className="w-full [@media(min-width:1100px)]:text-[16px] text-[15px] bg-[#018496] text-white border-r-[1px] border-r-[#fff]">
-              <p className="pl-[20px] py-[15px] font-[500] text-white">
-                No. Of Positions
-              </p>
-            </div>
-            {/* `````` */}
-            <p className="w-[100%] h-[54px] border-r-[1px] border-r-[#00000038] px-[20px] py-[15px]"></p>
-          </div>
-          <div className="[@media(min-width:1100px)]:min-w-[240px] min-w-[210px]">
-            {/* Tittle */}
-            <div className="w-full [@media(min-width:1100px)]:text-[16px] text-[15px] bg-[#018496] text-white border-r-[1px] border-r-[#fff]">
-              <p className="pl-[20px] py-[15px] font-[500] text-white">
-                Deadline
-              </p>
-            </div>
-            {/* `````` */}
-            <p className="w-[100%] h-[54px] border-r-[1px] border-r-[#00000038] px-[20px] py-[15px]"></p>
-          </div>
-          <div className="[@media(min-width:1100px)]:w-[1200px] w-[1080px] bg-white absolute bottom-0 left-0">
-            <p className="px-[20px] py-[15px]">
-              Sorry! There is no available job circular right now. Please keep
-              in touch.
-            </p>
-          </div>
-        </main>
-      </main>
-    </div>
-  );
+					{data?.length <= 0 && (
+						<p className=" p-10 text-center">
+							Sorry! There are no available job positions right now. Please keep
+							in touch.
+						</p>
+					)}
+				</div>
+			</main>
+		</div>
+	);
 };
 
 export default AvailablePositionsDetails;

@@ -54,7 +54,9 @@ const UpdateProduct = lazy(() =>
 );
 
 const withSuspense = Component => (
-	<Suspense fallback={<div>Loading...</div>}>{Component}</Suspense>
+	<Suspense fallback={<div className="flex items-center justify-center min-h-screen">
+			<div className="w-12 h-12 border-4 border-t-transparent border-primary rounded-full animate-spin"></div>
+		</div>}>{Component}</Suspense>
 );
 
 const router = createBrowserRouter([
@@ -99,23 +101,23 @@ const router = createBrowserRouter([
 		],
 	},
 	{
-		path: "/admin",
+		path: "/superAdmin",
 		element: <AdminLayout />,
 		errorElement: <ErrorPage />,
 		children: [
 			// Dashboard Home
-			{ path: "/admin/dashboard", element: withSuspense(<AdminDashboard />) },
+			{ path: "/superAdmin/dashboard", element: withSuspense(<AdminDashboard />) },
 			// Dashboard All Products
 			{
-				path: "/admin/product-solutions/all-products",
+				path: "/superAdmin/product-solutions/all-products",
 				element: withSuspense(<AdminDashboardAllProduct />),
 			},
 			{
-				path: "/admin/product-solutions/update/:pid",
+				path: "/superAdmin/product-solutions/update/:pid",
 				element: withSuspense(<UpdateProduct />),
 			},
 			{
-				path: "/admin/product-solutions/add-product",
+				path: "/superAdmin/product-solutions/add-product",
 				element: withSuspense(<AdminDashboardAddProduct />),
 			},
 		],
