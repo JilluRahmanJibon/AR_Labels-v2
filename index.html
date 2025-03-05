@@ -2,13 +2,27 @@
 <html lang="en">
 	<head>
 		<meta charset="UTF-8" />
-		<link rel="icon" type="image/svg+xml" href="/vite.svg" />
-		<link href="/dist/styles.css" rel="stylesheet" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta
+			name="description"
+			content="AR Labels & Trim LTD. - High-quality labels and trims for your business. Explore our premium branding solutions." />
+
+		<!-- Favicon -->
+		<link rel="icon" type="image/png" href="/fav.png" />
+
+		<!-- Preload Critical Assets -->
+		<link rel="preload" href="/styles.css" as="style" />
+		<!-- If you're using custom fonts -->
+
+		<!-- Stylesheet -->
+		<link href="/styles.css" rel="stylesheet" />
+
 		<title>AR Labels & Trim LTD.</title>
 	</head>
 	<body>
 		<div id="root"></div>
-		<script type="module" src="/src/main.jsx"></script>
+
+		<!-- Main JavaScript File -->
+		<script type="module" src="/src/main.jsx" async></script>
 	</body>
 </html>

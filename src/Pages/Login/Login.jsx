@@ -8,7 +8,7 @@ import { BaseURL } from "../../utils/BaseURL";
 export default function Login() {
 	const navigate = useNavigate();
 
-	const [clickEye, setclickEye] = useState(true);
+	const [clickEye, setClickEye] = useState(true);
 	const [isLoading, setIsLoading] = useState(false);
 	const [formData, setFormData] = useState({
 		email: "",
@@ -67,9 +67,10 @@ export default function Login() {
 
 	return (
 		<main
-			className={`w-[100%] h-[100vh] flex flex-col justify-center items-center relative mt-[4.5rem] GeologicaFont`}>
+			className={`w-[100%] md:h-[80vh] flex flex-col justify-center items-center relative  GeologicaFont`}>
 			<div className="container mx-auto flex flex-col justify-center ">
 				<div className="relative mx-auto">
+					<h1 className="text-center font-bold pb-1 text-lg">Welcome back</h1>
 					<div className="relative w-[400px] min-h-[400px] rounded-[10px] flex justify-center items-center shadow-[0px_0px_6px_0px_#c6c6c6]">
 						<div className="relative w-full h-full p-[40px]">
 							<h2 className="relative text-black text-[24px] tracking-[1px] text-center pb-[20px]">
@@ -78,6 +79,7 @@ export default function Login() {
 							<form onSubmit={handleSubmit}>
 								<div className="mb-[15px] text-left">
 									<label className="relative">
+										Email
 										<input
 											type="email"
 											id="email"
@@ -87,15 +89,13 @@ export default function Login() {
 											value={formData.email}
 											onChange={handleChange}
 											placeholder="example@gmail.com"
-											className="inputStyleIng  border-[2px] border-[#00000087] text-black text-sm rounded-lg focus:ring-[#018496] focus:border-[#00000087] block w-full p-2.5 dark:!bg-transparent dark:border-[#00000087] placeholder-[#pffffff9c] dark:focus:ring-[#018496] dark:focus:border-[#018496] font-[500] outline-none"
+											className="border-2 border-[#018496] text-black text-sm rounded-lg w-full p-2.5 outline-none"
 										/>
-										<span className="inputStyleIngText text-sm text-black text-opacity-80 bg-[#fff] absolute left-2 top-3 px-1 transition duration-200 input-text cursor-text">
-											Email address
-										</span>
 									</label>
 								</div>
 								<div className="mb-[12px] text-left">
 									<label className="relative">
+										Password
 										<input
 											type={clickEye ? "password" : "text"}
 											id="password"
@@ -105,20 +105,17 @@ export default function Login() {
 											value={formData.password}
 											onChange={handleChange}
 											placeholder="xxxxxxx"
-											className="inputStyleIng  border-[2px] border-[#00000087] text-black text-sm rounded-lg focus:ring-[#018496] focus:border-[#00000087] block w-full p-2.5 dark:!bg-transparent dark:border-[#00000087] placeholder-[#pffffff9c] dark:focus:ring-[#018496] dark:focus:border-[#018496] font-[500] outline-none"
+											className="border-2 border-[#018496] text-black text-sm rounded-lg w-full p-2.5 outline-none"
 										/>
-										<span className="inputStyleIngText text-sm text-black text-opacity-80 bg-[#fff] absolute left-2 top-3 px-1 transition duration-200 input-text cursor-text">
-											Password
-										</span>
 										<FaEyeSlash
-											onClick={() => setclickEye(true)}
-											className={`text-[16px] text-[#00000087] absolute right-[8px] top-[14px] cursor-pointer ${
+											onClick={() => setClickEye(true)}
+											className={`text-[16px] text-[#00000087] absolute right-[8px] top-[37px] cursor-pointer ${
 												clickEye ? "hidden" : ""
 											}`}
 										/>
 										<FaEye
-											onClick={() => setclickEye(false)}
-											className={`text-[16px] text-[#00000087] absolute right-[8px] top-[14px] cursor-pointer ${
+											onClick={() => setClickEye(false)}
+											className={`text-[16px] text-[#00000087] absolute right-[8px] top-[37px] cursor-pointer ${
 												clickEye ? "" : "hidden"
 											}`}
 										/>
@@ -150,7 +147,7 @@ export default function Login() {
 
 								<p className="mt-[7px] text-black text-[14px]">
 									Don't Have An Account?
-									<Link to={"/sign_up"}>
+									<Link to={"/sign-up"}>
 										<span className="text-[#018496] pl-[5px] cursor-pointer">
 											Sign Up
 										</span>

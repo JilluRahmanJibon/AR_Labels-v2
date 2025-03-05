@@ -1,0 +1,84 @@
+
+body {
+	margin: 0;
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+		"Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+		sans-serif;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+code {
+	font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+		monospace;
+}
+
+ /* styles.css */
+.slick-dots {
+  @apply absolute bottom-4 left-1/2 transform -translate-x-1/2;
+  display: flex;
+  justify-content: center;
+}
+
+.slick-dots li {
+  margin: 0 5px;
+}
+
+.slick-dots button {
+  @apply bg-white w-3 h-3 rounded-full p-0;
+}
+
+.slick-dots .slick-active button {
+  @apply bg-[#018496]; /* Customize active dot color */
+}
+
+button {
+  @apply bg-black text-white p-2 rounded-full shadow-lg;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10;
+}
+
+button.left-arrow {
+  left: 4%;
+}
+
+button.right-arrow {
+  right: 4%;
+}
+
+.AboutPageImage {
+	background-size: cover;
+	background-position: center;
+	background-repeat: no-repeat;
+	background-attachment: fixed;
+}
+
+/* Label floating effect */
+
+.inputStyleIng[type="text"]:focus ~ .inputStyleIngText,
+.inputStyleIng[type="text"]:not(:placeholder-shown) ~ .inputStyleIngText {
+	@apply text-[#018496] bg-[#fff] transform -translate-y-[22px] -translate-x-[3px] scale-75 cursor-default;
+}
+.inputStyleIng[type="email"]:focus ~ .inputStyleIngText,
+.inputStyleIng[type="email"]:not(:placeholder-shown) ~ .inputStyleIngText {
+	@apply text-[#018496] bg-[#fff] transform -translate-y-[22px] -translate-x-[3px] scale-75 cursor-default;
+}
+.inputStyleIng[type="password"]:focus ~ .inputStyleIngText,
+.inputStyleIng[type="password"]:not(:placeholder-shown) ~ .inputStyleIngText {
+	@apply text-[#018496] bg-[#fff] transform -translate-y-[22px] -translate-x-[3px] scale-75 cursor-default;
+}
+
+.inputStyleIng[type="file"]:focus ~ .inputStyleIngText,
+.inputStyleIng[type="file"]:not(:placeholder-shown) ~ .inputStyleIngText {
+	@apply text-[#018496] bg-[#fff] transform -translate-y-[22px] -translate-x-[3px] scale-75 cursor-default;
+}
+
+.inputStyleIng[type="tel"]:focus ~ .inputStyleIngText,
+.inputStyleIng[type="tel"]:not(:placeholder-shown) ~ .inputStyleIngText {
+	@apply text-[#018496] bg-[#fff] transform -translate-y-[22px] -translate-x-[3px] scale-75 cursor-default;
+}
+
+
+

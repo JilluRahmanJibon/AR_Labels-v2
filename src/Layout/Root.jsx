@@ -20,6 +20,8 @@ const Root = () => {
 	const { data, isLoading } = useQuery({
 		queryKey: ["/categories"],
 		queryFn: fetchCategories,
+		staleTime: 1000 * 60 * 5,
+		refetchOnWindowFocus: false,
 	});
 
 	let user;
@@ -28,7 +30,7 @@ const Root = () => {
 	}
 
 	// Render spinner while data is loading
-	if (isLoading) return <Spinner />;
+	// if (isLoading) return <Spinner />;
 
 	return (
 		<main>

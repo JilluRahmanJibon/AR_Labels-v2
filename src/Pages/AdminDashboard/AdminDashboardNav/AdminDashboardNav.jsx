@@ -2,7 +2,7 @@
 import { useState } from "react";
 import { Navigate, NavLink, useLocation } from "react-router-dom";
 import { FaChevronDown, FaPowerOff } from "react-icons/fa6";
-import logo from "../../../Assets/logo3.png";
+import logo from "../../../Assets/logo.png";
 import { RxCross2 } from "react-icons/rx";
 import { ImHome } from "react-icons/im";
 import { GoChevronRight } from "react-icons/go";

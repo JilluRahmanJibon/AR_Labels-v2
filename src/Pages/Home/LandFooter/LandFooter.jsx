@@ -1,5 +1,4 @@
-import React from "react";
-import logo from "../../../Assets/logo3.png";
+import logo from "../../../Assets/logo.png";
 import { MdEmail } from "react-icons/md";
 import { FaPhoneFlip } from "react-icons/fa6";
 import { Link } from "react-router-dom";
@@ -171,7 +170,7 @@ const LandFooter = () => {
 									/>
 									<div className="flex justify-between">
 										<p className="md:text-sm text-[13px] text-left">
-											* We won't share it with third party.
+											* We won&apos;t share it with third party.
 										</p>
 										<button className="bg-[#018496]  border-[2px] border-primary text-white py-[6px] px-[18px] rounded-md hover:bg-transparent transition">
 											Subscribe

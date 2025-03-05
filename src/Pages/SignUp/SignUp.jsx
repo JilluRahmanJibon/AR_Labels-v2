@@ -3,142 +3,124 @@ import { Link } from "react-router-dom";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 
 export default function SignUp() {
-	const [clickEye, setclickEye] = useState(true);
-	const [clickEye2, setclickEye2] = useState(true);
+	const [clickEye, setClickEye] = useState(true);
+	const [formData, setFormData] = useState({
+		name: "",
+		email: "",
+		number: "",
+		password: "",
+	});
+
+	// Handle input change
+	const handleChange = e => {
+		setFormData({ ...formData, [e.target.name]: e.target.value });
+	};
+
+	// Handle form submission
+	const handleSubmit = async e => {
+		e.preventDefault();
+		console.log("User Data:", formData); // Debugging, remove this in production
+
+		// Send data to backend
+		try {
+			const response = await fetch("http://localhost:5000/api/signup", {
+				method: "POST",
+				headers: {
+					"Content-Type": "application/json",
+				},
+				body: JSON.stringify(formData),
+			});
+
+			const result = await response.json();
+			console.log("Server Response:", result); // Handle response as needed
+		} catch (error) {
+			console.error("Error:", error);
+		}
+	};
+
 	return (
-		<main
-			className={`w-[100%] h-[100vh] flex flex-col justify-center items-center relative   GeologicaFont`}>
-			<div className="container mx-auto flex flex-col justify-center ">
-				<div className="relative mx-auto">
-					<div className="relative w-[400px] min-h-[400px] rounded-[10px] flex justify-center items-center shadow-[0px_0px_6px_0px_#c6c6c6]">
-						<div className="relative w-full h-full p-[40px]">
-							<h2 className="relative text-black text-[24px] tracking-[1px] text-center pb-[20px]">
-								Sign Up
-							</h2>
-							<form>
-								<div className="mb-[12px] text-left">
-									<label className="relative">
-										<input
-											type="text"
-											id="firstName"
-											name="firstName"
-											autoComplete="off"
-											required
-											placeholder=""
-											className="inputStyleIng  border-[2px] border-[#00000087] text-black text-sm rounded-lg focus:ring-[#018496] focus:border-[#00000087] block w-full p-2.5 dark:!bg-transparent dark:border-[#00000087] placeholder-[#pffffff9c] dark:focus:ring-[#018496] dark:focus:border-[#018496] font-[500] outline-none"
-										/>
-										<span className="inputStyleIngText text-sm text-black text-opacity-80 bg-[#fff] absolute left-2 top-3 px-1 transition duration-200 input-text cursor-text">
-											First Name
-										</span>
-									</label>
-								</div>
-								<div className="mb-[12px] text-left">
-									<label className="relative">
-										<input
-											type="text"
-											id="lastName"
-											name="lastName"
-											autoComplete="off"
-											required
-											placeholder=""
-											className="inputStyleIng  border-[2px] border-[#00000087] text-black text-sm rounded-lg focus:ring-[#018496] focus:border-[#00000087] block w-full p-2.5 dark:!bg-transparent dark:border-[#00000087] placeholder-[#pffffff9c] dark:focus:ring-[#018496] dark:focus:border-[#018496] font-[500] outline-none"
-										/>
-										<span className="inputStyleIngText text-sm text-black text-opacity-80 bg-[#fff] absolute left-2 top-3 px-1 transition duration-200 input-text cursor-text">
-											Last Name
-										</span>
-									</label>
-								</div>
-								<div className="mb-[12px] text-left">
-									<label className="relative">
-										<input
-											type="email"
-											id="email"
-											name="email"
-											autoComplete="off"
-											required
-											placeholder=""
-											className="inputStyleIng  border-[2px] border-[#00000087] text-black text-sm rounded-lg focus:ring-[#018496] focus:border-[#00000087] block w-full p-2.5 dark:!bg-transparent dark:border-[#00000087] placeholder-[#pffffff9c] dark:focus:ring-[#018496] dark:focus:border-[#018496] font-[500] outline-none"
-										/>
-										<span className="inputStyleIngText text-sm text-black text-opacity-80 bg-[#fff] absolute left-2 top-3 px-1 transition duration-200 input-text cursor-text">
-											Email address
-										</span>
-									</label>
-								</div>
-								<div className="mb-[12px] text-left">
-									<label className="relative">
-										<input
-											type={clickEye ? "password" : "text"}
-											id="password"
-											name="password"
-											autoComplete="off"
-											required
-											placeholder=""
-											className="inputStyleIng  border-[2px] border-[#00000087] text-black text-sm rounded-lg focus:ring-[#018496] focus:border-[#00000087] block w-full p-2.5 dark:!bg-transparent dark:border-[#00000087] placeholder-[#pffffff9c] dark:focus:ring-[#018496] dark:focus:border-[#018496] font-[500] outline-none"
-										/>
-										<span className="inputStyleIngText text-sm text-black text-opacity-80 bg-[#fff] absolute left-2 top-3 px-1 transition duration-200 input-text cursor-text">
-											Password
-										</span>
-										<FaEyeSlash
-											onClick={() => setclickEye(true)}
-											className={`text-[16px] text-[#00000087] absolute right-[8px] top-[14px] cursor-pointer ${
-												clickEye ? "hidden" : ""
-											}`}
-										/>
-										<FaEye
-											onClick={() => setclickEye(false)}
-											className={`text-[16px] text-[#00000087] absolute right-[8px] top-[14px] cursor-pointer ${
-												clickEye ? "" : "hidden"
-											}`}
-										/>
-									</label>
-								</div>
-								<div className="mb-[12px] text-left">
-									<label className="relative">
-										<input
-											type={clickEye2 ? "password" : "text"}
-											id="confirmpassword"
-											name="confirmpassword"
-											autoComplete="off"
-											required
-											placeholder=""
-											className="inputStyleIng  border-[2px] border-[#00000087] text-black text-sm rounded-lg focus:ring-[#018496] focus:border-[#00000087] block w-full p-2.5 dark:!bg-transparent dark:border-[#00000087] placeholder-[#pffffff9c] dark:focus:ring-[#018496] dark:focus:border-[#018496] font-[500] outline-none"
-										/>
-										<span className="inputStyleIngText text-sm text-black text-opacity-80 bg-[#fff] absolute left-2 top-3 px-1 transition duration-200 input-text cursor-text">
-											Confirm Password
-										</span>
-										<FaEyeSlash
-											onClick={() => setclickEye2(true)}
-											className={`text-[16px] text-[#00000087] absolute right-[8px] top-[14px] cursor-pointer ${
-												clickEye2 ? "hidden" : ""
-											}`}
-										/>
-										<FaEye
-											onClick={() => setclickEye2(false)}
-											className={`text-[16px] text-[#00000087] absolute right-[8px] top-[14px] cursor-pointer ${
-												clickEye2 ? "" : "hidden"
-											}`}
-										/>
-									</label>
-								</div>
-
-								<button
-									type="submit"
-									value="Submit Now"
-									className="text-[14px] w-full py-[8px] rounded-[50px] hover:!bg-transparent bg-[#018496] text-[#fff] hover:text-[#018496] border-[2px] border-[#018496] transition-[0.4s]">
-									Sign Up
-								</button>
-
-								<p className="mt-[10px] text-black text-[14px]">
-									AllReady Have An Account?{" "}
-									<Link to={"/login"}>
-										<span className="text-[#018496] pl-[5px] cursor-pointer">
-											LogIn
-										</span>
-									</Link>
-								</p>
-							</form>
+		<main className="w-full h-[80vh] flex flex-col justify-center items-center">
+			<div className="container mx-auto flex flex-col justify-center items-center">
+				<div className="sm:w-[400px] w-full min-h-[400px] rounded-lg shadow-md p-10">
+					<h2 className="text-black text-2xl text-center pb-5">Sign Up</h2>
+					<form onSubmit={handleSubmit}>
+						<div className="mb-3">
+							<label className="relative block">
+								<input
+									type="text"
+									name="name"
+									value={formData.name}
+									onChange={handleChange}
+									required
+									placeholder="First Name"
+									className="border-2 border-[#018496] text-black text-sm rounded-lg w-full p-2.5 outline-none"
+								/>
+							</label>
 						</div>
-					</div>
+
+						<div className="mb-3">
+							<label className="relative block">
+								<input
+									type="email"
+									name="email"
+									value={formData.email}
+									onChange={handleChange}
+									required
+									placeholder="Email Address"
+									className="border-2 border-[#018496] text-black text-sm rounded-lg w-full p-2.5 outline-none"
+								/>
+							</label>
+						</div>
+						<div className="mb-3">
+							<label className="relative block">
+								<input
+									type="text"
+									name="number"
+									value={formData.number}
+									onChange={handleChange}
+									required
+									placeholder="Phone Number"
+									className="border-2 border-[#018496] text-black text-sm rounded-lg w-full p-2.5 outline-none"
+								/>
+							</label>
+						</div>
+						<div className="mb-3 relative">
+							<label className="block">
+								<input
+									type={clickEye ? "password" : "text"}
+									name="password"
+									value={formData.password}
+									onChange={handleChange}
+									required
+									placeholder="Password"
+									className="border-2 border-[#018496] text-black text-sm rounded-lg w-full p-2.5 outline-none"
+								/>
+								{clickEye ? (
+									<FaEyeSlash
+										onClick={() => setClickEye(false)}
+										className="absolute right-3 top-3 cursor-pointer text-gray-600"
+									/>
+								) : (
+									<FaEye
+										onClick={() => setClickEye(true)}
+										className="absolute right-3 top-3 cursor-pointer text-gray-600"
+									/>
+								)}
+							</label>
+						</div>
+
+						<button
+							type="submit"
+							className="w-full py-2 rounded-full bg-teal-600 text-white hover:bg-transparent border-2 border-teal-600 hover:text-teal-600 transition">
+							Sign Up
+						</button>
+						<p className="mt-3 text-black text-sm">
+							Already have an account?
+							<Link to="/login" className="text-teal-600 pl-1">
+								Log In
+							</Link>
+						</p>
+					</form>
 				</div>
 			</div>
 		</main>
