@@ -80,7 +80,7 @@ const Banner = () => {
 
 	return (
 		<div>
-			{products && (
+			{products?.length>0 && (
 				<div className="max-w-[1920px] mx-auto">
 					<Slider {...settings} className="w-full">
 						{products?.map(({ _id, image }) => {

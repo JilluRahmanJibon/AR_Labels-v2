@@ -22,16 +22,25 @@ const AdminDashboardNav = ({ data }) => {
 
 	// Left Nav
 	const menuItemsDashboard = [
+		// {
+		// 	name: "About Us",
+		// 	subItems: [
+		// 		// { name: 'About Us', path: '/aboutUs' },
+		// 		{ name: "Our Company", path: "/about-our-company" },
+		// 		{ name: "Mission & Vision", path: "/about-mission-vision" },
+		// 		{ name: "AR Labels Family", path: "/about-ar-labels-family" },
+		// 		{ name: "Ethics & Values", path: "/about-ethics-values" },
+		// 		{ name: "Affiliations", path: "/about-affiliations" },
+		// 		{ name: "Client References", path: "/about-client-references" },
+		// 	],
+		// },
 		{
-			name: "About Us",
+			name: "Banner Management",
 			subItems: [
-				// { name: 'About Us', path: '/aboutUs' },
-				{ name: "Our Company", path: "/about-our-company" },
-				{ name: "Mission & Vision", path: "/about-mission-vision" },
-				{ name: "AR Labels Family", path: "/about-ar-labels-family" },
-				{ name: "Ethics & Values", path: "/about-ethics-values" },
-				{ name: "Affiliations", path: "/about-affiliations" },
-				{ name: "Client References", path: "/about-client-references" },
+				{
+					name: "Banner",
+					path: `/${data?.role}/banner`,
+				},
 			],
 		},
 		{
@@ -39,36 +48,36 @@ const AdminDashboardNav = ({ data }) => {
 			subItems: [
 				{
 					name: "All Product",
-					path: "/superAdmin/product-solutions/all-products",
+					path: `/${data?.role}/product-solutions/all-products`,
 				},
 				{
 					name: "Add Product",
-					path: "/superAdmin/product-solutions/add-product",
+					path: `/${data?.role}/product-solutions/add-product`,
 				},
 			],
 		},
-		{
-			name: "Sustainability",
-			subItems: [{ name: "Certifications", path: "/certifications" }],
-		},
-		{
-			name: "News & Events",
-			subItems: [{ name: "Our News & Events", path: "/news-events" }],
-		},
-		{
-			name: "Careers",
-			subItems: [
-				{ name: "Available Positions", path: "/careers/available_positions" },
-				{ name: "Apply Online", path: "/careers/apply-online" },
-			],
-		},
+		// {
+		// 	name: "Sustainability",
+		// 	subItems: [{ name: "Certifications", path: "/certifications" }],
+		// },
+		// {
+		// 	name: "News & Events",
+		// 	subItems: [{ name: "Our News & Events", path: "/news-events" }],
+		// },
+		// {
+		// 	name: "Careers",
+		// 	subItems: [
+		// 		{ name: "Available Positions", path: "/careers/available_positions" },
+		// 		{ name: "Apply Online", path: "/careers/apply-online" },
+		// 	],
+		// },
 	];
 	return (
 		<>
 			{/* Dashboard Top Nav */}
 			<div
 				data-aos="fade-down"
-				className="w-full flex flex-col fixed top-[0px] z-50 GeologicaFont">
+				className="w-full flex flex-col  top-[0px] z-50 GeologicaFont">
 				<nav
 					className={` w-full relative bg-white shadow-[0px_0px_3px_0px_#0003]
         `}
@@ -112,7 +121,7 @@ const AdminDashboardNav = ({ data }) => {
 			<div
 				className={`w-[15rem] ${
 					showLeftNav ? "flex" : "hidden"
-				} flex-col fixed top-0 left-[0px] z-[40] GeologicaFont`}>
+				} flex-col   top-0 left-[0px] z-[40] GeologicaFont`}>
 				<nav
 					className={` w-full relative bg-white shadow-[0px_0px_3px_0px_#0003]
         `}
@@ -142,7 +151,7 @@ const AdminDashboardNav = ({ data }) => {
 								{/* Nav Item */}
 								<div className="pt-[1rem] space-y-1 px-[20px] z-[1] relative">
 									<NavLink
-										to={`${data?.role}/dashboard`}
+										to={`/${data?.role}/dashboard`}
 										className={({ isActive }) =>
 											isActive
 												? "flex items-center justify-between py-[1rem] rounded-md text-[14px] font-medium text-[#018496]  "

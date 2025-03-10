@@ -5,6 +5,7 @@ import ErrorPage from "../Components/ErrorPage/ErrorPage";
 import Home from "../Pages/Home/Home";
 import ContactUs from "../Pages/ContactUs/ContactUs";
 import { lazy, Suspense } from "react";
+import BSection from "../Pages/Admin/Banner/BSection";
 
 // Lazy Load Components for Better Performance
 const OurCompany = lazy(() => import("../Pages/AboutUs/OurCompany/OurCompany"));
@@ -36,21 +37,21 @@ const SignUp = lazy(() => import("../Pages/SignUp/SignUp"));
 const Certifications = lazy(() =>
 	import("../Pages/Sustainability/Certifications")
 );
-const AdminDashboard = lazy(() =>
-	import("../Pages/AdminDashboard/AdminDashboard")
+const Dashboard = lazy(() =>
+	import("../Pages/Dashboard/Dashboard")
 );
-const AdminDashboardAllProduct = lazy(() =>
+const AllProducts = lazy(() =>
 	import(
-		"../Pages/AdminDashboard/AdminDashboardAllProduct/AdminDashboardAllProduct"
+		"../Pages/Admin/Products/AllProducts"
 	)
 );
-const AdminDashboardAddProduct = lazy(() =>
+const AddProduct = lazy(() =>
 	import(
-		"../Pages/AdminDashboard/AdminDashboardAddProduct/AdminDashboardAddProduct"
+		"../Pages/Admin/Products/AddProduct"
 	)
 );
 const UpdateProduct = lazy(() =>
-	import("../Pages/AdminDashboard/AdminDashboardAllProduct/UpdateProduct")
+	import("../Pages/Admin/Products/UpdateProduct")
 );
 
 const withSuspense = Component => (
@@ -106,11 +107,15 @@ const router = createBrowserRouter([
 		errorElement: <ErrorPage />,
 		children: [
 			// Dashboard Home
-			{ path: "/superAdmin/dashboard", element: withSuspense(<AdminDashboard />) },
+			{ path: "/superAdmin/dashboard", element: withSuspense(<Dashboard />) },
 			// Dashboard All Products
 			{
+				path: "/superAdmin/banner",
+				element: withSuspense(<BSection />),
+			},
+			{
 				path: "/superAdmin/product-solutions/all-products",
-				element: withSuspense(<AdminDashboardAllProduct />),
+				element: withSuspense(<AllProducts />),
 			},
 			{
 				path: "/superAdmin/product-solutions/update/:pid",
@@ -118,7 +123,7 @@ const router = createBrowserRouter([
 			},
 			{
 				path: "/superAdmin/product-solutions/add-product",
-				element: withSuspense(<AdminDashboardAddProduct />),
+				element: withSuspense(<AddProduct />),
 			},
 		],
 	},
