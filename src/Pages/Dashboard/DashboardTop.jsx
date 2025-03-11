@@ -1,17 +1,13 @@
-import { FaTimes } from "react-icons/fa";
+import { FaBars, FaTimes } from "react-icons/fa";
 import { NavLink } from "react-router-dom";
 import logo from "../../Assets/logo.png";
-import { RxCross2 } from "react-icons/rx";
 
 const DashboardTop = ({ showSideNav, setSideNav }) => {
 	return (
-		<div
-			data-aos="fade-down"
-			className="w-full flex flex-col  top-[0px] z-50 GeologicaFont">
+		<div className="w-full flex flex-col  top-[0px] z-50 GeologicaFont">
 			<nav
 				className={` w-full relative bg-white shadow-[0px_0px_3px_0px_#0003]
-        `}
-				style={{ transition: ".1s ease-in" }}>
+        `}>
 				<div className="mx-auto">
 					<div className="flex justify-between items-center h-[4rem] sm:pr-[2rem] pr-[1rem]">
 						{/* Logo */}
@@ -25,7 +21,7 @@ const DashboardTop = ({ showSideNav, setSideNav }) => {
 							</NavLink>
 						</div>
 
-						<RxCross2
+						<FaTimes
 							onClick={() => setSideNav(false)}
 							className={`${
 								showSideNav
@@ -34,7 +30,7 @@ const DashboardTop = ({ showSideNav, setSideNav }) => {
 							} h-[22px] w-[22px] ml-[1rem]  cursor-pointer text-gray-500`}
 						/>
 
-						<FaTimes
+						<FaBars
 							onClick={() => setSideNav(true)}
 							className={`${
 								showSideNav

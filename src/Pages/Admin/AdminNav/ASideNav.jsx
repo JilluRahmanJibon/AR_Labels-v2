@@ -127,7 +127,7 @@ const ASideNav = ({ data }) => {
 			</div>
 
 			{/* Logout Button - Fixed at Bottom */}
-			<div className="pb-4 px-6">
+			<div className="pb-4  px-6">
 				<button
 					onClick={() => {
 						const confirmBox = window.confirm("Do you really want to Logout?");
@@ -136,7 +136,7 @@ const ASideNav = ({ data }) => {
 						}
 					}}
 					className="flex items-center text-red-600 py-3 px-[20px] hover:bg-gray-100 rounded-md w-full">
-					<p className="text-[14px] font-[500] pr-[5px]"></p> Logout
+					<p className="text-[14px] font-[500] pr-[5px]">Logout </p>
 					<FaPowerOff className="text-[13px]" />
 				</button>
 			</div>

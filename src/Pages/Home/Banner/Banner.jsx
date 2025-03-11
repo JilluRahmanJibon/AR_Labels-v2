@@ -9,17 +9,12 @@ import Spinner from "../../../Components/Loader/Spinner";
 import { Link } from "react-router-dom";
 import { BaseURL } from "../../../utils/BaseURL";
 
-const fetchAllProducts = async () => {
-	try {
-		const res = await fetch(`${BaseURL}/products/`);
-		if (!res.ok) throw new Error("Failed to fetch products");
-		const data = await res.json();
-		return data?.data || [];  
-	} catch (error) {
-		console.error("Error fetching all products:", error);
-		return [];  
-	}
+const fetchBanner = async () => {
+	const response = await fetch(`${BaseURL}/banner`);
+	if (!response.ok) throw new Error("Failed to fetch banner");
+	return response.json();
 };
+
 const NextButton = memo(({ onClick }) => (
 	<div
 		className="bg-gray-300 w-[30px] h-[80px] absolute top-1/2 -translate-y-1/2 right-0 flex items-center justify-center cursor-pointer z-10 text-black hover:text-[#018496] transition duration-300"
@@ -41,17 +36,16 @@ const PrevButton = memo(({ onClick }) => (
 PrevButton.displayName = "PrevButton";
 
 const Banner = () => {
-	const bannerData = [
-		{ id: 1, image: "https://arltl.com/web-cms-arltl/uploads/banner-1.jpg" },
-		{ id: 2, image: "https://arltl.com/web-cms-arltl/uploads/banner-2.jpg" },
-		{ id: 3, image: "https://arltl.com/web-cms-arltl/uploads/banner-3.jpg" },
-		{ id: 4, image: "https://arltl.com/web-cms-arltl/uploads/banner-4.jpg" },
-	];
-	const { isLoading, data: products } = useQuery({
-		queryKey: ["products"],
-		queryFn: fetchAllProducts,
+	// const bannerData = [
+	// 	{ id: 1, image: "https://arltl.com/web-cms-arltl/uploads/banner-1.jpg" },
+	// 	{ id: 2, image: "https://arltl.com/web-cms-arltl/uploads/banner-2.jpg" },
+	// 	{ id: 3, image: "https://arltl.com/web-cms-arltl/uploads/banner-3.jpg" },
+	// 	{ id: 4, image: "https://arltl.com/web-cms-arltl/uploads/banner-4.jpg" },
+	// ];
+	const { data: fetchedBanner, isLoading } = useQuery({
+		queryKey: ["/banner"],
+		queryFn: fetchBanner, // Fixed fetch function
 	});
-	console.log("🚀 ~ Banner ~ products:", products);
 	if (isLoading) {
 		return <Spinner />;
 	}
@@ -80,21 +74,17 @@ const Banner = () => {
 
 	return (
 		<div>
-			{products?.length>0 && (
+			{fetchedBanner?.data?.length > 0 && (
 				<div className="max-w-[1920px] mx-auto">
-					<Slider {...settings} className="w-full">
-						{products?.map(({ _id, image }) => {
-							if (!image || image.length === 0) {
-								console.warn("Missing images for product:", _id);
-								return null;
-							}
+					<Slider {...settings} className="w-full ">
+						{fetchedBanner?.data?.map(({ _id, productID, img }) => {
 							return (
-								<Link key={_id} to={`/products/${_id}`}>
+								<Link key={_id} to={`/products/${productID}`}>
 									<img
-										src={image[0]?.img}
+										src={img}
 										loading="lazy"
 										className="w-full h-auto max-h-[500px] object-cove"
-										alt={`Product ${_id}`}
+										alt={`Product ${productID}`}
 									/>
 								</Link>
 							);
