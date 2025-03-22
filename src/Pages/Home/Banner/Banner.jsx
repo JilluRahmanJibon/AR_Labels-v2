@@ -60,7 +60,7 @@ const Banner = () => {
 		pauseOnHover: false,
 		appendDots: dots => (
 			<div style={{ bottom: "10px" }}>
-				<ul className="flex justify-center space-x-2">{dots}</ul>
+				<ul className="flex  justify-center space-x-2">{dots}</ul>
 			</div>
 		),
 		customPaging: index => (

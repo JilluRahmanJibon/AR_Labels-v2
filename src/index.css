@@ -1,1 +1,32 @@
 @import "tailwindcss";
+
+.custom-pagination .swiper-pagination-bullet {
+	width: 100%;
+	height: 3px;
+	background-color: #000;
+	margin: 0 4px !important;
+}
+
+.swiper-pagination-bullet-active {
+	background-color: transparent;
+	border-bottom: 0px solid #000;
+	margin: 0 4px !important;
+}
+/* Custom next and previous buttons */
+.swiper-button-next::after,
+.swiper-button-prev::after {
+	font-size: 10px !important;
+	color: white;
+	background-color: gray;
+	border-radius: 50%;
+	padding: 15px;
+}
+
+/* Additional margin adjustments for next and prev buttons */
+.swiper-button-next::after {
+	margin-left: 40px;
+}
+
+.swiper-button-prev::after {
+	margin-right: 40px;
+}

@@ -117,7 +117,7 @@ const AdminDashboardAddProduct = () => {
 	};
 
 	return (
-		<div className="w-full h-full pt-[4rem] [@media(min-width:1400px)]:pl-[15rem] pl-0 relative GeologicaFont">
+		<div className="w-full h-full relative GeologicaFont">
 			<div className="w-full h-full pt-[1rem]">
 				<h1 className="text-center font-semibold text-[19px] sm:text-[30px]">
 					Add Product

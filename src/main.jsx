@@ -10,9 +10,10 @@ const queryClient = new QueryClient();
 createRoot(document.getElementById("root")).render(
 	<StrictMode>
 		<QueryClientProvider client={queryClient}>
-			<RouterProvider router={router}>
-				<Toaster />
-			</RouterProvider>
+			{/* Toaster should be outside of RouterProvider */}
+			<Toaster position="top-right" richColors />
+
+			<RouterProvider router={router} />
 		</QueryClientProvider>
 	</StrictMode>
 );

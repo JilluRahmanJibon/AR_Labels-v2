@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { MdKeyboardArrowRight, MdKeyboardArrowLeft } from "react-icons/md";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
@@ -86,7 +86,7 @@ const AdminDashboardAllProduct = () => {
 		prevArrow: <PrevButton />,
 	};
 	return (
-		<div className="w-full h-full pt-[4rem] [@media(min-width:1400px)]:pl-[15rem] pl-0 relative GeologicaFont">
+		<div className="w-full h-full relative GeologicaFont">
 			<div className="w-full h-full pt-[1rem]">
 				<h1 className="[@media(min-width:800px)]:text-[30px] [@media(min-width:600px)]:text-[27px] [@media(min-width:500px)]:text-[25px] [@media(min-width:400px)]:text-[22px] text-[19px] font-semibold text-center">
 					<span className="text-[#018496] ">" {data?.data?.length} "</span>{" "}

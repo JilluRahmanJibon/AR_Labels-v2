@@ -24,18 +24,14 @@ const DashboardTop = ({ showSideNav, setSideNav }) => {
 						<FaTimes
 							onClick={() => setSideNav(false)}
 							className={`${
-								showSideNav
-									? "[@media(min-width:1400px)]:hidden flex "
-									: "hidden"
+								showSideNav ? " " : "hidden"
 							} h-[22px] w-[22px] ml-[1rem]  cursor-pointer text-gray-500`}
 						/>
 
 						<FaBars
 							onClick={() => setSideNav(true)}
 							className={`${
-								showSideNav
-									? "hidden"
-									: "[@media(min-width:1400px)]:hidden flex"
+								showSideNav ? "hidden" : ""
 							} h-[22px] w-[22px] ml-[1rem]  cursor-pointer text-gray-500`}
 						/>
 					</div>

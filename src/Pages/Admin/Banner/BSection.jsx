@@ -6,6 +6,7 @@ import axios from "axios";
 import { BaseURL } from "../../../utils/BaseURL";
 import Slider from "react-slick";
 import { Link } from "react-router-dom";
+import { toast } from "sonner";
 
 const fetchCategories = async () => {
 	const response = await fetch(`${BaseURL}/categories`);
@@ -41,6 +42,7 @@ PrevButton.displayName = "PrevButton";
 
 const BSection = () => {
 	const [selectedProduct, setSelectedProduct] = useState(null);
+	const [isBanner, setIsBanner] = useState(null);
 	const queryClient = useQueryClient();
 
 	const { data, isLoading, error } = useQuery({
@@ -76,13 +78,37 @@ const BSection = () => {
 			);
 			return data;
 		},
-		onSuccess: () => queryClient.invalidateQueries(["/banner"]),
-		onError: err => console.error("Error setting banner:", err),
+		onSuccess: data => {
+		 toast.success(data?.message || "Banner set successfully!");
+			queryClient.invalidateQueries(["/banner"]);
+		},
+		onError: err => {
+		 toast.error(err.response?.data?.message);
+			 
+		},
 	});
 
 	// Handle banner setting
 	const handleSetBanner = () => {
 		if (selectedProduct) mutate(selectedProduct);
+	};
+
+	const deleteBannerMutation = useMutation({
+		mutationFn: async bannerId => {
+			const token = localStorage.getItem("authToken");
+			await axios.delete(`${BaseURL}/banner/remove/${bannerId}`, {
+				headers: { Authorization: token },
+			});
+		},
+		onSuccess: () => {
+			toast.success("Banner deleted successfully!");
+
+			queryClient.invalidateQueries(["/banner"]);
+		},
+		onError: err => console.error("Error deleting banner:", err),
+	});
+	const handleDeleteBanner = bannerId => {
+		deleteBannerMutation.mutate(bannerId);
 	};
 
 	const settings = {
@@ -92,7 +118,7 @@ const BSection = () => {
 		slidesToScroll: 1,
 		autoplay: true,
 		autoplaySpeed: 3500,
-		pauseOnHover: false,
+		pauseOnHover: true,
 		appendDots: dots => (
 			<div style={{ bottom: "10px" }}>
 				<ul className="flex justify-center space-x-2">{dots}</ul>
@@ -135,28 +161,46 @@ const BSection = () => {
 				disabled={!selectedProduct || isSettingBanner}>
 				{isSettingBanner ? "Setting Banner..." : "Set Banner"}
 			</button>
-
+			{isBanner && (
+				<p className="text-green-500 text-center mb-3.5 font-bold">
+					{isBanner}
+				</p>
+			)}
 			{setBannerError && (
-				<p className="text-red-500 mt-2">Error setting banner!</p>
+				<p className="text-red-500 text-center mb-3.5 font-bold">
+					{setBannerError?.response?.data?.message}
+				</p>
 			)}
 
-			{bannerLoading && <p>Loading banner...</p>}
+			{bannerLoading && <p className="text-center">Loading banner...</p>}
 			{bannerError && (
-				<p className="text-red-500 mt-2">Error loading banner!</p>
+				<p className="text-red-500 text-center mb-3.5 font-bold">
+					Error loading banner!
+				</p>
 			)}
 
 			{fetchedBanner?.data?.length > 0 ? (
 				<div className="max-w-[1920px] mx-auto">
 					<Slider {...settings} className="w-full">
 						{fetchedBanner?.data?.map(({ _id, productID, img }) => (
-							<Link key={_id} to={`/products/${productID}`}>
-								<img
-									src={img}
-									loading="lazy"
-									className="w-full h-auto max-h-[500px] object-cover"
-									alt={`Product ${productID}`}
-								/>
-							</Link>
+							<div key={_id} className="relative">
+								{/* Delete Button */}
+								<button
+									onClick={() => handleDeleteBanner(_id)} // Create this function for deletion
+									className="absolute top-2 cursor-pointer right-2 bg-red-500 text-white px-3 py-1 text-sm rounded hover:bg-red-600 transition duration-200 shadow-lg">
+									Delete
+								</button>
+
+								{/* Image with Link */}
+								<Link to={`/products/${productID}`}>
+									<img
+										src={img}
+										loading="lazy"
+										className="w-full h-auto max-h-[500px] object-cover"
+										alt={`Product ${productID}`}
+									/>
+								</Link>
+							</div>
 						))}
 					</Slider>
 				</div>

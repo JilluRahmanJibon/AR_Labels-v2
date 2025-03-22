@@ -1,4 +1,5 @@
 import Banner from "./Banner/Banner";
+import Banner2 from "./Banner/Banner2";
 import LandAbout from "./LandAbout/LandAbout";
 import Branding from "./Branding/Branding";
 import Experience from "./Experience/Experience";
@@ -14,7 +15,8 @@ const Home = () => {
 	return (
 		<main>
 			{/*  banner section  */}
-			<Banner />
+			<Banner2 />
+			{/* <Banner /> */}
 			{/* experience section  */}
 			<Experience />
 			{/* About Us section  */}
@@ -22,7 +24,7 @@ const Home = () => {
 			{/* service section  */}
 			<OurService />
 			{/* Manufacturing  */}
-			<Manufacturing  />
+			<Manufacturing />
 			{/* WhyChooseUs */}
 			<WhyChooseUs />
 			{/* Portfolio  */}
