@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
-import Spinner from "../../Components/Loader/Spinner";
+import Spinner from "../../components/Loader/Spinner";
 import { BaseURL } from "../../utils/BaseURL";
 import DynamicSlider from "../../Shared/DynamicSlider/DynamicSlider";
 

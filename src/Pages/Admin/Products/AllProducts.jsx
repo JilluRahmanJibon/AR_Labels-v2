@@ -5,7 +5,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { GoDotFill } from "react-icons/go";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
-import Spinner from "../../../Components/Loader/Spinner";
+import Spinner from "../../../components/Loader/Spinner";
 import { Link } from "react-router-dom";
 import { toast } from "sonner";
 import { BaseURL } from "../../../utils/BaseURL";

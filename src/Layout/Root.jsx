@@ -1,7 +1,7 @@
 import React, { Suspense } from "react";
 import { Outlet } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
-import Spinner from "../Components/Loader/Spinner";
+import Spinner from "../components/Loader/Spinner";
 import { BaseURL } from "../utils/BaseURL";
 import GoToTop from "../utils/GoToTop";
 import verifyToken from "../utils/verifyToken";

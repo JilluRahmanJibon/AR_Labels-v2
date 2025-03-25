@@ -21,19 +21,61 @@ const GoToTop = () => {
 		return () => window.removeEventListener("scroll", listenToScroll);
 	}, []);
 
+	// Animation variants
+	const buttonVariants = {
+		hidden: { opacity: 0, scale: 0, width: 0, height: 0 }, // Start collapsed
+		visible: {
+			opacity: 1,
+			scale: 1,
+			width: "auto", // Expands to natural size
+			height: "auto",
+			transition: {
+				duration: 0.4,
+				ease: "easeOut",
+				when: "beforeChildren", // Animate children after parent
+				staggerChildren: 0.1,
+			},
+		},
+		exit: {
+			opacity: 0,
+			scale: 0,
+			width: 0,
+			height: 0,
+			transition: { duration: 0.3, ease: "easeIn" },
+		},
+		hover: {
+			scale: 1.1,
+			rotate: 360, // Adds a playful spin on hover
+			boxShadow: "0px 10px 20px rgba(1, 132, 150, 0.3)",
+			transition: { duration: 0.5 },
+		},
+	};
+
+	const childVariants = {
+		hidden: { opacity: 0, y: 10 },
+		visible: { opacity: 1, y: 0 },
+	};
+
 	return (
 		<div className="fixed bottom-8 right-8 z-50">
 			<AnimatePresence>
 				{isVisible && (
 					<motion.button
 						onClick={goToBtn}
-						initial={{ opacity: 0, scale: 0.9 }}
-						animate={{ opacity: 1, scale: 1 }}
-						exit={{ opacity: 0, scale: 0.9 }}
-						transition={{ duration: 0.3 }}
-						className="flex items-center justify-center bg-gradient-to-r from-red-500 via-red-600 to-red-700 text-white px-4 py-2 rounded-full shadow-lg hover:shadow-2xl hover:scale-105 transition-all duration-300">
-						<BsArrowUpCircle className="mr-2 w-6 h-6" />
-						<span className="text-sm font-semibold">Go to Top</span>
+						variants={buttonVariants}
+						initial="hidden"
+						animate="visible"
+						exit="exit"
+						whileHover="hover"
+						className="flex items-center justify-center bg-[#018496] text-white px-4 py-2 rounded-full shadow-lg hover:bg-[#016f80] overflow-hidden">
+						<motion.div variants={childVariants}>
+							<BsArrowUpCircle className="w-6 h-6 mr-2" />
+						</motion.div>
+						<motion.span
+							variants={childVariants}
+							className="text-sm md:text-base font-semibold whitespace-nowrap">
+							Back to Top
+						</motion.span>
 					</motion.button>
 				)}
 			</AnimatePresence>

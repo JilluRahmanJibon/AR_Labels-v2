@@ -1,15 +1,15 @@
-import   { Suspense, lazy } from "react";
+import { Suspense, lazy } from "react";
 import DynamicBanner from "../../../Shared/DynamicBanner/DynamicBanner";
 import Spinner from "../../../components/Loader/Spinner";
 
-
 // Lazy load components
 const AboutSkils = lazy(() => import("./AboutSkils/AboutSkils"));
-const OurCompanyDetails = lazy(() => import("./OurCompanyDetails/OurCompanyDetails"));
+const OurCompanyDetails = lazy(() =>
+	import("./OurCompanyDetails/OurCompanyDetails")
+);
 
-function OurCompany ()
-{
-  return (
+function OurCompany() {
+	return (
 		<main>
 			{/*  banner section  */}
 			<DynamicBanner
@@ -17,7 +17,7 @@ function OurCompany ()
 				bg="https://www.arltl.com/web-cms-arltl/uploads/about-banner.jpg"
 			/>
 			{/*  skils and company details sections */}
-			<Suspense fallback={<Spinner/>}>
+			<Suspense fallback={<Spinner />}>
 				<AboutSkils />
 				<OurCompanyDetails />
 			</Suspense>

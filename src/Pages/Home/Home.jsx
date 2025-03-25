@@ -1,5 +1,4 @@
 import Banner from "./Banner/Banner";
-import Banner2 from "./Banner/Banner2";
 import LandAbout from "./LandAbout/LandAbout";
 import Branding from "./Branding/Branding";
 import Experience from "./Experience/Experience";
@@ -15,7 +14,7 @@ const Home = () => {
 	return (
 		<main>
 			{/*  banner section  */}
-			<Banner2 />
+			<Banner />
 			{/* <Banner /> */}
 			{/* experience section  */}
 			<Experience />

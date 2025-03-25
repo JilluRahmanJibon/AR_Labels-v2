@@ -1,32 +1,45 @@
 @import "tailwindcss";
-
+/* Custom Pagination */
 .custom-pagination .swiper-pagination-bullet {
-	width: 100%;
-	height: 3px;
-	background-color: #000;
-	margin: 0 4px !important;
+  width: 100%; /* Full width for a sleek bar effect */
+  height: 4px; /* Slightly thicker for visibility */
+  background-color: #ffffff; /* White for contrast against dark background */
+  margin: 0 6px !important; /* Increased spacing for a cleaner look */
+  border-radius: 2px; /* Subtle rounding */
+  transition: all 0.3s ease-in-out; /* Smooth transition */
 }
 
-.swiper-pagination-bullet-active {
-	background-color: transparent;
-	border-bottom: 0px solid #000;
-	margin: 0 4px !important;
+.custom-pagination .swiper-pagination-bullet-active {
+  background-color: #018496; /* Your primary teal color for active state */
+  border-bottom: none; /* Removed border-bottom as it’s not needed */
+  transform: scale(1.2); /* Slight scale-up for emphasis */
+  margin: 0 6px !important; /* Consistent spacing */
 }
-/* Custom next and previous buttons */
+
+/* Custom Navigation Buttons */
 .swiper-button-next::after,
 .swiper-button-prev::after {
-	font-size: 10px !important;
-	color: white;
-	background-color: gray;
-	border-radius: 50%;
-	padding: 15px;
+  font-size: 14px !important; /* Slightly larger for better visibility */
+  color: #ffffff; /* White text/icons */
+  background-color: rgba(75, 85, 99, 0.9); /* Gray-700 with slight transparency */
+  border-radius: 50%; /* Circular buttons */
+  padding: 18px; /* Increased padding for a larger, more clickable area */
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3); /* Subtle shadow for depth */
+  transition: background-color 0.3s ease, transform 0.2s ease; /* Smooth hover effects */
 }
 
-/* Additional margin adjustments for next and prev buttons */
+/* Hover Effects for Navigation Buttons */
+.swiper-button-next:hover::after,
+.swiper-button-prev:hover::after {
+  background-color: #018496; /* Your primary teal color on hover */
+  transform: scale(1.1); /* Slight scale-up on hover */
+}
+
+/* Margin Adjustments for Positioning */
 .swiper-button-next::after {
-	margin-left: 40px;
+  margin-left: 40px; /* Pushes the next button away from the edge */
 }
 
 .swiper-button-prev::after {
-	margin-right: 40px;
+  margin-right: 40px; /* Pushes the prev button away from the edge */
 }

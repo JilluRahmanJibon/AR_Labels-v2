@@ -2,39 +2,28 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { motion } from "framer-motion";
-import { GoDotFill } from "react-icons/go";
+import { FaArrowLeft, FaArrowRight } from "react-icons/fa"; // Using react-icons for arrows
 
 const Testimonial = () => {
 	const settings = {
-		dots: true,
-		infinite: false,
+		dots: false, // Removed dots
+		infinite: true,
 		slidesToShow: 2,
 		slidesToScroll: 1,
 		nextArrow: <SampleNextArrow />,
 		prevArrow: <SamplePrevArrow />,
+		autoplay: true,
+		autoplaySpeed: 5000,
 		responsive: [
 			{
 				breakpoint: 1024,
 				settings: {
 					slidesToShow: 1,
 					slidesToScroll: 1,
-					infinite: false,
-					dots: true,
+					infinite: true,
 				},
 			},
 		],
-		appendDots: dots => (
-			<div style={{ bottom: "-40px" }}>
-				<ul className="m-0 " id="bannerDotId">
-					{dots}
-				</ul>
-			</div>
-		),
-		customPaging: () => (
-			<div className="bannerDotliId w-[17px] bottom-0">
-				<GoDotFill className="cursor-pointer sm:!text-[17px] text-[16px]" />
-			</div>
-		),
 	};
 
 	const TestimonialClint = [
@@ -42,7 +31,7 @@ const Testimonial = () => {
 			id: 1,
 			name: "Christopher",
 			description:
-				"It really met my requirements. You guys were very patient even though there were delays from my side. The price was competitive and all our requirements were met. If somebody were to ask me for something similar, I would definitely recommend you guys",
+				"It really met my requirements. You guys were very patient even though there were delays from my side. The price was competitive and all our requirements were met. I’d definitely recommend you!",
 			position: "United States",
 			image:
 				"https://badshaagency.netlify.app/static/media/img5.e56ccb9063f496db12da.jpg",
@@ -51,7 +40,7 @@ const Testimonial = () => {
 			id: 2,
 			name: "Anthony",
 			description:
-				"This is a very Good Seller who is prompt, courteous, and has a good command of English. I continue to work with him because he has many skills beyond what he advertises.",
+				"Prompt, courteous, and skilled beyond what’s advertised. A great seller I continue to work with!",
 			position: "South Korea",
 			image:
 				"https://badshaagency.netlify.app/static/media/img5.e56ccb9063f496db12da.jpg",
@@ -60,7 +49,7 @@ const Testimonial = () => {
 			id: 3,
 			name: "Richard",
 			description:
-				"I am very pleased with the quality of leads delivered. Leads were delivered on time. Very professional, and responsive. I plan to use his services again!",
+				"Very pleased with the quality of leads delivered on time. Professional and responsive—will use again!",
 			position: "United States",
 			image:
 				"https://badshaagency.netlify.app/static/media/img5.e56ccb9063f496db12da.jpg",
@@ -69,7 +58,7 @@ const Testimonial = () => {
 			id: 4,
 			name: "Barbara",
 			description:
-				"Went over and beyond on my order. Thank you very much you did more than I asked and will for sure work with you on future projects. I can recommend this freelancer to any future customer who needs good work done!",
+				"Exceeded expectations on my order. Went above and beyond—highly recommend for future projects!",
 			position: "Canada",
 			image:
 				"https://badshaagency.netlify.app/static/media/img5.e56ccb9063f496db12da.jpg",
@@ -78,87 +67,150 @@ const Testimonial = () => {
 			id: 5,
 			name: "Kenneth",
 			description:
-				"This is a very Good Seller who is prompt, courteous, and has a good command of English. I continue to work with him because he has many skills beyond what he advertises.",
-			position: "United Kingdom ",
+				"A skilled and courteous seller with excellent communication. A pleasure to work with repeatedly!",
+			position: "United Kingdom",
 			image:
 				"https://badshaagency.netlify.app/static/media/img5.e56ccb9063f496db12da.jpg",
 		},
 	];
 
+	// Animation variants
+	const cardVariants = {
+		hidden: { opacity: 0, y: 30, scale: 0.95 },
+		visible: { opacity: 1, y: 0, scale: 1 },
+		hover: { scale: 1.05, boxShadow: "0px 15px 30px rgba(1, 132, 150, 0.3)" },
+	};
+
 	return (
-		<div className="text-black body-font bg-[#fff] [@media(min-width:460px)]:py-[3rem] py-[1.5rem] GeologicaFont">
-			<div className="xl:!w-[1230px] sm:!w-[96%] [@media(min-width:460px)]:w-[98%] w-[100%] [@media(min-width:460px)]:px-5 px-3 mx-auto relative ">
+		<section className="py-12 md:py-20 bg-gradient-to-b from-white to-gray-50 overflow-hidden">
+			<div className="max-w-[1240px] mx-auto px-6 md:px-8">
+				{/* Animated Title Section */}
 				<motion.p
 					initial={{ opacity: 0, y: -20 }}
-					animate={{ opacity: 1, y: 0 }}
+					whileInView={{ opacity: 1, y: 0 }}
 					transition={{ duration: 0.5 }}
-					className="text-[#018496] [@media(min-width:530px)]:text-[15px] [@media(min-width:460px)]:text-[13px] text-[12px] mx-auto  text-center relative z-10 ">
+					viewport={{ once: false }}
+					className="text-[#018496] text-sm md:text-base font-medium text-center mb-2">
 					Testimonial
 				</motion.p>
 				<motion.h1
 					initial={{ opacity: 0, y: -20 }}
-					animate={{ opacity: 1, y: 0 }}
-					transition={{ duration: 0.5, delay: 0.2 }}
-					className="sm:!text-3xl [@media(min-width:460px)]:text-[26px] text-[20px] text-gray-800 sm:!leading-[36px] [@media(min-width:460px)]:leading-[32px] leading-[25px] font-semibold title-font [@media(min-width:460px)]:mb-[19px] sm:!mb-[1.5rem] mb-[0px] text-center relative z-10 ">
-					What People Say About
-					<br />
-					Our Company
-				</motion.h1>
-				<motion.div
-					initial={{ opacity: 0, scale: 0.8 }}
-					whileInView={{ opacity: 1, scale: 1 }}
-					whileHover={{ scale: 1 }}
+					whileInView={{ opacity: 1, y: 0 }}
+					transition={{ duration: 0.6, delay: 0.2 }}
 					viewport={{ once: false }}
-					transition={{ duration: 0.5, delay:  0.2 }}
-					className=" [@media(min-width:846px)]:py-[2px] py-[10px] mx-auto flex items-center w-[100%] relative z-10 ">
-					<Slider {...settings} className="w-full h-full">
-						{TestimonialClint.map(key => {
-							return (
-								<motion.div
-									key={key.id}
-									className="sm:!px-[10px] px-0 w-[100%] my-[10px]">
-									<div className="h-full bg-[#fff] sm:!px-8 px-6 sm:!py-8 py-4 rounded [@media(min-width:460px)]:shadow-[0px_0px_6px_0px_#00000021] shadow-none [@media(min-width:460px)]:text-left text-center">
-										<svg
-											xmlns="http://www.w3.org/2000/svg"
-											fill="currentColor"
-											className="block [@media(min-width:460px)]:w-5 w-[2rem] [@media(min-width:460px)]:h-5 h-[2rem] text-gray-400 sm:!mb-4 mb-3 [@media(min-width:460px)]:mx-0 mx-auto"
-											viewBox="0 0 975.036 975.036">
-											<path d="M925.036 57.197h-304c-27.6 0-50 22.4-50 50v304c0 27.601 22.4 50 50 50h145.5c-1.9 79.601-20.4 143.3-55.4 191.2-27.6 37.8-69.399 69.1-125.3 93.8-25.7 11.3-36.8 41.7-24.8 67.101l36 76c11.6 24.399 40.3 35.1 65.1 24.399 66.2-28.6 122.101-64.8 167.7-108.8 55.601-53.7 93.7-114.3 114.3-181.9 20.601-67.6 30.9-159.8 30.9-276.8v-239c0-27.599-22.401-50-50-50zM106.036 913.497c65.4-28.5 121-64.699 166.9-108.6 56.1-53.7 94.4-114.1 115-181.2 20.6-67.1 30.899-159.6 30.899-277.5v-239c0-27.6-22.399-50-50-50h-304c-27.6 0-50 22.4-50 50v304c0 27.601 22.4 50 50 50h145.5c-1.9 79.601-20.4 143.3-55.4 191.2-27.6 37.8-69.4 69.1-125.3 93.8-25.7 11.3-36.8 41.7-24.8 67.101l35.9 75.8c11.601 24.399 40.501 35.2 65.301 24.399z"></path>
-										</svg>
-										<p className="[@media(min-width:460px)]:leading-relaxed leading-[17px] sm:!mb-6 mb-4 sm:!text-[16px] text-[13px] h-[115px]">
-											{key.description}
-										</p>
-										<div className="inline-flex items-center">
-											<img
-												alt="testimonial"
-												src={key.image}
-												className="sm:!w-12 w-[35px] sm:!h-12 h-[35px] rounded-full flex-shrink-0 object-cover object-center"
-											/>
-											<span className="flex-grow flex flex-col sm:!pl-4 [@media(min-width:460px)]:pl-[13px] pl-[10px] sm:!leading-[23px] leading-[17px] text-left">
-												<span className="title-font [@media(min-width:460px)]:font-medium font-normal sm:!text-[16px] text-[14px]">
-													{key.name}
-												</span>
-												<span className="sm:!text-sm [@media(min-width:460px)]:text-[12px] text-[11px]  font-light [@media(min-width:460px)]:ml-0 ml-[1.5px]">
-													{key.position}
-												</span>
+					className="text-4xl md:text-5xl font-extrabold text-center text-gray-900 mb-12 tracking-tight drop-shadow-md">
+					What People Say About Us
+					<span className="block h-1 w-24 bg-[#018496] rounded-full mx-auto mt-3"></span>
+				</motion.h1>
+
+				{/* Slider Section */}
+				<motion.div
+					initial={{ opacity: 0, scale: 0.9 }}
+					whileInView={{ opacity: 1, scale: 1 }}
+					transition={{ duration: 0.6 }}
+					viewport={{ once: false }}
+					className="relative">
+					<Slider {...settings} className="w-full">
+						{TestimonialClint.map(client => (
+							<motion.div
+								key={client.id}
+								variants={cardVariants}
+								initial="hidden"
+								whileInView="visible"
+								whileHover="hover"
+								transition={{ duration: 0.5 }}
+								viewport={{ once: false }}
+								className="px-4 py-6">
+								<div className="bg-white rounded-xl shadow-lg p-6 md:p-8 h-full flex flex-col justify-between border border-gray-200 hover:border-[#018496]/50 relative overflow-hidden">
+									{/* Gradient Overlay on Hover */}
+									<div className="absolute inset-0 bg-gradient-to-t from-[#018496]/10 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-500 z-0"></div>
+
+									{/* Quote Icon */}
+									<svg
+										xmlns="http://www.w3.org/2000/svg"
+										fill="currentColor"
+										className="w-6 h-6 md:w-8 md:h-8 text-[#018496] mb-4 z-10"
+										viewBox="0 0 975.036 975.036">
+										<path d="M925.036 57.197h-304c-27.6 0-50 22.4-50 50v304c0 27.601 22.4 50 50 50h145.5c-1.9 79.601-20.4 143.3-55.4 191.2-27.6 37.8-69.399 69.1-125.3 93.8-25.7 11.3-36.8 41.7-24.8 67.101l36 76c11.6 24.399 40.3 35.1 65.1 24.399 66.2-28.6 122.101-64.8 167.7-108.8 55.601-53.7 93.7-114.3 114.3-181.9 20.601-67.6 30.9-159.8 30.9-276.8v-239c0-27.599-22.401-50-50-50zM106.036 913.497c65.4-28.5 121-64.699 166.9-108.6 56.1-53.7 94.4-114.1 115-181.2 20.6-67.1 30.899-159.6 30.899-277.5v-239c0-27.6-22.399-50-50-50h-304c-27.6 0-50 22.4-50 50v304c0 27.601 22.4 50 50 50h145.5c-1.9 79.601-20.4 143.3-55.4 191.2-27.6 37.8-69.4 69.1-125.3 93.8-25.7 11.3-36.8 41.7-24.8 67.101l35.9 75.8c11.601 24.399 40.501 35.2 65.301 24.399z" />
+									</svg>
+
+									{/* Testimonial Text */}
+									<p className="text-gray-600 text-sm md:text-base leading-relaxed mb-6 h-[120px] md:h-[100px] z-10">
+										{client.description}
+									</p>
+
+									{/* Client Info */}
+									<div className="flex items-center z-10">
+										<img
+											alt={client.name}
+											src={client.image}
+											className="w-12 h-12 md:w-14 md:h-14 rounded-full flex-shrink-0 object-cover object-center shadow-md"
+										/>
+										<span className="flex-grow flex flex-col pl-4">
+											<span className="text-gray-800 font-semibold text-base md:text-lg">
+												{client.name}
 											</span>
-										</div>
+											<span className="text-gray-500 text-xs md:text-sm font-light">
+												{client.position}
+											</span>
+										</span>
 									</div>
-								</motion.div>
-							);
-						})}
+
+									{/* Decorative Element */}
+									<motion.div
+										className="absolute bottom-0 left-0 w-0 h-2 bg-[#018496] rounded-r-full"
+										whileInView={{ width: 80 }}
+										transition={{ duration: 0.8 }}
+									/>
+								</div>
+							</motion.div>
+						))}
 					</Slider>
+
+					{/* Custom Next/Prev Buttons at Bottom */}
+					<div className="flex justify-center gap-6 mt-8">
+						<motion.button
+							className="p-3 bg-[#018496] text-white rounded-full shadow-md hover:bg-[#016f80] transition-all duration-300"
+							whileHover={{ scale: 1.1 }}
+							whileTap={{ scale: 0.95 }}
+							onClick={() => document.querySelector(".slick-prev").click()}>
+							<FaArrowLeft className="text-xl" />
+						</motion.button>
+						<motion.button
+							className="p-3 bg-[#018496] text-white rounded-full shadow-md hover:bg-[#016f80] transition-all duration-300"
+							whileHover={{ scale: 1.1 }}
+							whileTap={{ scale: 0.95 }}
+							onClick={() => document.querySelector(".slick-next").click()}>
+							<FaArrowRight className="text-xl" />
+						</motion.button>
+					</div>
 				</motion.div>
 			</div>
-		</div>
+		</section>
 	);
 };
 
-function SampleNextArrow() {
-	return <div className="hidden"></div>;
+// Custom Arrows (Visible and Styled)
+function SampleNextArrow(props) {
+	const { className, style, onClick } = props;
+	return (
+		<div
+			className={`${className} hidden`}
+			style={{ ...style }}
+			onClick={onClick}
+		/>
+	);
 }
-function SamplePrevArrow() {
-	return <div className="hidden"></div>;
+
+function SamplePrevArrow(props) {
+	const { className, style, onClick } = props;
+	return (
+		<div
+			className={`${className} hidden`}
+			style={{ ...style }}
+			onClick={onClick}
+		/>
+	);
 }
 
 export default Testimonial;

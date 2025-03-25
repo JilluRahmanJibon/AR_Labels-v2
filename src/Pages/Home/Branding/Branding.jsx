@@ -1,9 +1,9 @@
 import React, { useMemo } from "react";
 import Marquee from "react-fast-marquee";
 import PropTypes from "prop-types";
-import { motion } from "framer-motion"; // Import Framer Motion
+import { motion } from "framer-motion";
 
-// Import brand logos only once at the top
+// Import brand logos
 import brandLogo1 from "../../../Assets/brand/brandLogo4.png";
 import brandLogo2 from "../../../Assets/brand/brandLogo8.png";
 import brandLogo3 from "../../../Assets/brand/brandLogo3.png";
@@ -16,7 +16,7 @@ import brandLogo9 from "../../../Assets/brand/brandLogo9.png";
 import brandLogo10 from "../../../Assets/brand/brandLogo11.png";
 import brandLogo11 from "../../../Assets/brand/brandLogo10.png";
 
-// Memoize brand logo data to avoid recreation on every render
+// Memoized brand logo data
 const brandLogoData = [
 	{ id: 1, image: brandLogo1 },
 	{ id: 2, image: brandLogo2 },
@@ -34,19 +34,21 @@ const brandLogoData = [
 // Memoized LogoItem Component
 const LogoItem = React.memo(({ keyData }) => {
 	return (
-		<div
-			className="[@media(min-width:625px)]:w-[65px] [@media(min-width:400px)]:w-[55px] w-[40px] 
-		[@media(min-width:625px)]:mr-[45px] [@media(min-width:400px)]:mr-[35px] mr-[25px] 
-		shadow-[0px_0px_6px_0px_#0000000f]">
-			<img src={keyData.image} className="w-full" alt="brand logo" />
-		</div>
+		<motion.div
+			whileHover={{ scale: 1.1, rotate: 5 }}
+			transition={{ duration: 0.3 }}
+			className="w-[60px] md:w-[80px] mx-6 md:mx-8 shadow-lg rounded-lg overflow-hidden border border-gray-200 hover:border-[#018496]/50">
+			<img
+				src={keyData.image}
+				className="w-full h-auto"
+				alt="brand logo"
+				loading="lazy"
+			/>
+		</motion.div>
 	);
 });
 
-// Add display name for debugging
 LogoItem.displayName = "LogoItem";
-
-// Add PropTypes validation
 LogoItem.propTypes = {
 	keyData: PropTypes.shape({
 		id: PropTypes.number.isRequired,
@@ -58,58 +60,69 @@ const Branding = () => {
 	// Memoized logo items
 	const logoItems = useMemo(
 		() => brandLogoData.map(item => <LogoItem key={item.id} keyData={item} />),
-		[brandLogoData]
+		[]
 	);
 
 	return (
-		<main>
-			<motion.section
-				whileInView={{ opacity: 1, scale: 1 }}
-				initial={{ opacity: 0, scale: 0.8 }}
-				transition={{ duration: 0.6 }}
-				viewport={{ once: false }}
-				className="text-gray-600 body-font GeologicaFont">
-				<div
-					className="xl:w-[1230px] w-[100%] [@media(min-width:400px)]:px-5 px-0 
-				[@media(min-width:400px)]:pt-[2rem] pt-[1.5rem] [@media(min-width:625px)]:pb-[2rem] pb-[0.5rem] mx-auto">
-					<div className="w-[95%] mx-auto flex flex-wrap justify-center items-center">
-						<div className="[@media(min-width:600px)]:w-[550px] w-[100%] text-center md:m-0 m-auto">
-							<h1
-								className="sm:!text-[28px] [@media(min-width:460px)]:text-[26px] text-[20px] font-semibold 
-							text-center text-gray-800 mb-[8px]">
-								Sustainable branding <br />
-								from stitch to store
-							</h1>
-							<p className="leading-[22px] [@media(min-width:400px)]:pb-[5px] pb-[1px] md:text-[15px] sm:text-[14px] text-[13px]">
-								Looking to achieve your sustainability and branding targets?
-								We’ll help you get there with our range of eco-friendly
-								packaging and trims.
-							</p>
-							<p className="leading-[22px] [@media(min-width:400px)]:pb-[10px] pb-[5px] md:text-[15px] sm:text-[14px] text-[13px]">
-								As your branding partner, we’ll design, develop and deliver your
-								products globally through an infrastructure that benefits you.
-							</p>
-							<button
-								className="md:text-[15px] sm:text-[14px] text-[13px] text-white hover:text-[#018496] 
-							bg-[#018496] border-[2px] border-primary [@media(min-width:400px)]:py-2 py-[7px] 
-							[@media(min-width:400px)]:px-6 px-[18px] focus:outline-none hover:bg-transparent rounded-[50px] 
-							transition-[0.3s] mt-[5px]">
-								Our sustainability commitment
-							</button>
-						</div>
-					</div>
-					<div className="w-full [@media(min-width:400px)]:h-[110px] h-[90px] flex items-center mt-[1rem] relative">
-						<Marquee className="z-0">{logoItems}</Marquee>
-						<div
-							className="[@media(min-width:550px)]:w-[100px] [@media(min-width:400px)]:w-[80px] w-[50px] 
-						[@media(min-width:400px)]:h-[110px] h-[90px] absolute top-0 left-0 bg-gradient-to-r from-[#fff] z-[10]"></div>
-						<div
-							className="[@media(min-width:550px)]:w-[100px] [@media(min-width:400px)]:w-[80px] w-[50px] 
-						[@media(min-width:400px)]:h-[110px] h-[90px] absolute top-0 right-0 bg-gradient-to-l from-[#fff] z-[10]"></div>
-					</div>
-				</div>
-			</motion.section>
-		</main>
+		<section className="py-12 md:py-20 bg-gradient-to-b from-white to-gray-50 overflow-hidden">
+			<div className="max-w-[1240px] mx-auto px-6 md:px-8">
+				{/* Animated Title Section */}
+				<motion.div
+					initial={{ opacity: 0, y: -30 }}
+					whileInView={{ opacity: 1, y: 0 }}
+					transition={{ duration: 0.6 }}
+					viewport={{ once: false }}
+					className="text-center mb-12">
+					<h1 className="text-4xl md:text-5xl font-extrabold text-gray-900 tracking-tight drop-shadow-md">
+						Sustainable Branding
+						<span className="block text-2xl md:text-3xl font-semibold mt-2">
+							From Stitch to Store
+						</span>
+						<span className="block h-1 w-24 bg-[#018496] rounded-full mx-auto mt-4"></span>
+					</h1>
+				</motion.div>
+
+				{/* Text and Button Section */}
+				<motion.div
+					initial={{ opacity: 0, scale: 0.9 }}
+					whileInView={{ opacity: 1, scale: 1 }}
+					transition={{ duration: 0.6, delay: 0.2 }}
+					viewport={{ once: false }}
+					className="max-w-2xl mx-auto text-center mb-12">
+					<p className="text-gray-600 text-sm md:text-base leading-relaxed mb-4">
+						Looking to achieve your sustainability and branding targets? We’ll
+						help you get there with our range of eco-friendly packaging and
+						trims.
+					</p>
+					<p className="text-gray-600 text-sm md:text-base leading-relaxed mb-6">
+						As your branding partner, we design, develop, and deliver your
+						products globally through an infrastructure that benefits you.
+					</p>
+					<motion.a
+						href="#sustainability"
+						whileHover={{ scale: 1.05, backgroundColor: "#016f80" }}
+						whileTap={{ scale: 0.95 }}
+						className="inline-block px-6 py-3 md:px-8 md:py-4 bg-[#018496] text-white font-semibold rounded-full shadow-md hover:shadow-lg transition-all duration-300 text-sm md:text-base">
+						Our Sustainability Commitment
+					</motion.a>
+				</motion.div>
+
+				{/* Marquee Section */}
+				<motion.div
+					initial={{ opacity: 0, y: 30 }}
+					whileInView={{ opacity: 1, y: 0 }}
+					transition={{ duration: 0.6, delay: 0.4 }}
+					viewport={{ once: false }}
+					className="relative h-[120px] md:h-[150px] flex items-center">
+					<Marquee speed={50} gradient={false} className="z-0">
+						{logoItems}
+					</Marquee>
+					{/* Gradient Fades */}
+					<div className="absolute top-0 left-0 w-[80px] md:w-[120px] h-full bg-gradient-to-r from-white to-transparent z-10 pointer-events-none"></div>
+					<div className="absolute top-0 right-0 w-[80px] md:w-[120px] h-full bg-gradient-to-l from-white to-transparent z-10 pointer-events-none"></div>
+				</motion.div>
+			</div>
+		</section>
 	);
 };
 

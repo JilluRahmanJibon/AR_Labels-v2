@@ -1,7 +1,7 @@
 import React, { Suspense, useEffect, useState } from "react";
 import { Outlet, useNavigate } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
-import Spinner from "../Components/Loader/Spinner";
+import Spinner from "../components/Loader/Spinner";
 import { BaseURL } from "../utils/BaseURL";
 import DashboardTop from "../Pages/Dashboard/DashboardTop";
 import ASideNav from "../Pages/Admin/AdminNav/ASideNav";
