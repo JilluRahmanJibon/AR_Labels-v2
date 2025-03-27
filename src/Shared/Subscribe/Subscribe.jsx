@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 
-function NewsLetter() {
+function Subscribe() {
 	// Animation variants
 	const sectionVariants = {
 		hidden: { opacity: 0, scale: 0.9 },
@@ -51,7 +51,7 @@ function NewsLetter() {
 					whileInView={{ opacity: 1, scale: 1 }}
 					transition={{ duration: 0.6, delay: 0.4 }}
 					viewport={{ once: false }}
-					className="max-w-[500px] mx-auto md:mx-0">
+					className="max-w-[500px] mx-auto w-full">
 					<div className="grid gap-6 md:grid-cols-2 mb-6">
 						{/* First Name */}
 						<motion.div
@@ -129,7 +129,7 @@ function NewsLetter() {
 						type="submit"
 						whileHover={{ scale: 1.05, backgroundColor: "#018496" }}
 						whileTap={{ scale: 0.95 }}
-						className="bg-orange-400 text-black font-semibold text-sm md:text-base px-6 py-3 md:px-8 md:py-4 rounded-full border-2 border-[#c9EB61] hover:bg-transparent hover:text-white transition-all duration-300 shadow-md hover:shadow-lg">
+						className=" text-white cursor-pointer font-semibold text-sm md:text-base px-6 py-3 md:px-8 md:py-4 rounded-full border-2 border-[#c9EB61] hover:bg-transparent hover:text-white transition-all duration-300 shadow-md hover:shadow-lg">
 						Sign Me Up!
 					</motion.button>
 				</motion.form>
@@ -138,4 +138,4 @@ function NewsLetter() {
 	);
 }
 
-export default NewsLetter;
+export default Subscribe;

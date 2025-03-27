@@ -103,13 +103,7 @@ const LandAbout = () => {
 						competitive pricing—all while upholding integrity and customer
 						satisfaction.
 					</p>
-					<motion.a
-						href="#learn-more"
-						whileHover={{ scale: 1.05, backgroundColor: "#016f80" }}
-						whileTap={{ scale: 0.95 }}
-						className="inline-block mt-6 px-8 py-3 bg-[#018496] text-white font-semibold rounded-full shadow-md hover:shadow-lg transition-all duration-300">
-						Discover More
-					</motion.a>
+				 
 				</motion.div>
 			</div>
 		</section>

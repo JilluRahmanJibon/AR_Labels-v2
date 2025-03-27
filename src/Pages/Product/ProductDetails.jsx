@@ -4,6 +4,7 @@ import { IoChevronForwardCircle } from "react-icons/io5";
 import PageTitle from "../../utils/PageTitle";
 import WhyChooseArltl from "../../components/WhyChooseArltl/WhyChooseArltl";
 import { products } from "./PItems"; // Assuming this is your product data file
+import Subscribe from "../../Shared/Subscribe/Subscribe";
 
 const ProductDetails = () => {
 	const { pCategory } = useParams();
@@ -65,12 +66,11 @@ const ProductDetails = () => {
 					variants={bannerVariants}
 					initial="hidden"
 					animate="visible"
-					className="relative w-full md:h-[83vh] h-[60vh]">
+					className="relative w-full md:h-[83vh] h-[60vh] ">
 					{selectedProduct.video ? (
 						<video
 							className="w-full h-full object-cover rounded-br-[6rem]"
 							src={selectedProduct.video}
-							controls
 							autoPlay
 							muted
 							loop>
@@ -144,6 +144,7 @@ const ProductDetails = () => {
 
 			{/* Why Choose Section */}
 			<WhyChooseArltl />
+			<Subscribe />
 		</main>
 	);
 };

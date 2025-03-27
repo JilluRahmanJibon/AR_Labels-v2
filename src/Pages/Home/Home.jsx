@@ -8,7 +8,7 @@ import WhyChooseUs from "./WhyChooseUs/WhyChooseUs";
 import Portfolio from "./Portfolio/Portfolio";
 import Testimonials from "./Testimonials/Testimonials";
 import FAQs from "./FAQs/FAQs";
-import NewsLetter from "./NewsLetter/NewsLetter";
+import Subscribe from "../../Shared/Subscribe/Subscribe";
 import PageTitle from "../../utils/PageTitle";
 
 const Home = () => {
@@ -18,7 +18,6 @@ const Home = () => {
 				title={"AR Labels: Garment Branding Specialist & Clothing Bespoke."}
 			/>
 
-			{/*  banner section  */}
 			<Hero />
 			{/* <Banner /> */}
 			{/* experience section  */}
@@ -40,10 +39,7 @@ const Home = () => {
 			{/* Branding section  */}
 			<Branding />
 			{/* Our News Letter section  */}
-			<NewsLetter />
-
-			{/* footer section for landing page on the bottom */}
-			{/* <LandFooter /> */}
+			<Subscribe />
 		</main>
 	);
 };
