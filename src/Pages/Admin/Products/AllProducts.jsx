@@ -1,191 +1,127 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { MdKeyboardArrowRight, MdKeyboardArrowLeft } from "react-icons/md";
-import Slider from "react-slick";
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
-import { GoDotFill } from "react-icons/go";
-import { useQuery, useQueryClient } from "@tanstack/react-query";
-import Spinner from "../../../components/Loader/Spinner";
 import { Link } from "react-router-dom";
-import { toast } from "sonner";
-import { BaseURL } from "../../../utils/BaseURL";
+import { motion } from "framer-motion";
+import { products } from "../../Product/PItems";
 
 const AdminDashboardAllProduct = () => {
-	// Product Delete Action
-	const [handleDeleteCrumb, sethandleDeleteCrumb] = useState();
-	const queryClient = useQueryClient();
-	useEffect(() => {
-		const token = localStorage.getItem("authToken");
-		if (handleDeleteCrumb && token) {
-			const deleteData = async () => {
-				const toastId = toast.loading("Loading in");
+	const [productList, setProductList] = useState(products);  
 
-				try {
-					const response = await fetch(
-						`${BaseURL}/products/${handleDeleteCrumb}`,
-						{
-							method: "DELETE",
-							headers: {
-								Authorization: `${token}`,
-							},
-							enabled: !!token,
-						}
-					);
-
-					if (response.ok) {
-						queryClient.invalidateQueries("/products");
-						toast.success(`Product is Deleted successfully!`, {
-							id: toastId,
-							duration: 2000,
-						});
-					}
-				} catch (error) {
-					toast.error(` Something went wrong when deleting the product!`, {
-						id: toastId,
-						duration: 2000,
-					});
-				}
-			};
-
-			deleteData();
+	// Placeholder delete function (replace with your API call)
+	const handleDeleteCrumb = id => {
+		const confirmBox = window.confirm(
+			`Do you really want to delete the product with ID: ${id}?`
+		);
+		if (confirmBox) {
+			// Simulate API delete (replace with actual fetch call)
+			setProductList(prev => prev.filter(product => product._id !== id));
+			console.log(`Deleted product with ID: ${id}`);
+			// Example API call:
+			// fetch(`${BaseURL}/products/${id}`, { method: "DELETE" })
+			//   .then(() => setProductList(prev => prev.filter(p => p._id !== id)))
+			//   .catch(err => console.error("Delete failed:", err));
 		}
-	}, [handleDeleteCrumb, queryClient]);
-
-	const { isLoading, error, data } = useQuery({
-		queryKey: ["/products"],
-		queryFn: () =>
-			fetch(`${BaseURL}/products/`, {
-				method: "GET",
-			}).then(res => res.json()),
-	});
-
-	if (isLoading) return <Spinner />;
-	if (error) return <p>Error fetching data!</p>;
-
-	let settings = {
-		dots: true,
-		infinite: true,
-		slidesToShow: 1,
-		slidesToScroll: 1,
-		autoplay: true,
-		autoplaySpeed: 3500,
-		pauseOnHover: false,
-		appendDots: dots => (
-			<div style={{ bottom: "0px" }}>
-				<ul className="m-0" id="bannerSmallDotId">
-					{dots}
-				</ul>
-			</div>
-		),
-		customPaging: i => (
-			<div className="bannerSmallDotliId [@media(min-width:450px)]:w-[14px] w-[11px] bottom-0 [@media(min-width:450px)]:mt-[8px] mt-[15px]">
-				<GoDotFill className="cursor-pointer [@media(min-width:450px)]:text-[14px] text-[11px]" />
-			</div>
-		),
-		nextArrow: <NextButton />,
-		prevArrow: <PrevButton />,
 	};
+
+	// Animation variants
+	const cardVariants = {
+		hidden: { opacity: 0, y: 20 },
+		visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
+		hover: {
+			scale: 1.03,
+			boxShadow: "0 10px 20px rgba(1, 132, 150, 0.2)",
+			transition: { duration: 0.3 },
+		},
+	};
+
 	return (
-		<div className="w-full h-full relative GeologicaFont">
-			<div className="w-full h-full pt-[1rem]">
-				<h1 className="[@media(min-width:800px)]:text-[30px] [@media(min-width:600px)]:text-[27px] [@media(min-width:500px)]:text-[25px] [@media(min-width:400px)]:text-[22px] text-[19px] font-semibold text-center">
-					<span className="text-[#018496] ">" {data?.data?.length} "</span>{" "}
-					Product Found
-				</h1>
-				<div className="flex items-center mt-[5px] justify-center">
-					<div className="[@media(min-width:420px)]:w-[21px] w-[18px] [@media(min-width:420px)]:h-[3px] h-[2px] bg-[#FA0472] inline-flex"></div>
-					<div className="[@media(min-width:420px)]:w-[22px] w-[19px] [@media(min-width:420px)]:h-[6px] h-[5px] mx-[5px] bg-[#018496] inline-flex"></div>
-					<div className="[@media(min-width:420px)]:w-[21px] w-[18px] [@media(min-width:420px)]:h-[3px] h-[2px] bg-[#FA0472] inline-flex"></div>
-				</div>
-				<div className="flex flex-wrap w-[100%] mx-auto justify-center py-[2rem]">
-					{data?.data?.map(key => {
-						return (
-							<div
-								key={key?._id}
-								className="[@media(min-width:450px)]:w-[360px] [@media(min-width:370px)]:w-[330px] w-[300px] [@media(min-width:450px)]:mx-[10px] mx-0 my-[10px]  rounded-[10px] overflow-hidden border-[2px] border-[#ececec] bg-[#ffffff]">
-								{/* multiple image */}
-								<Slider
-									{...settings}
-									className={`w-[100%] [@media(min-width:450px)]:h-[190px] h-[150px] ${
-										key?.image?.length > 1 ? "flex" : "!hidden"
-									}  items-center overflow-hidden mx-auto`}>
-									{key?.image?.map(key => {
-										return (
-											<img
-												key={key?.img}
-												alt={key?.name}
-												src={key?.img}
-												className="w-[100%] block"
-											/>
-										);
-									})}
-								</Slider>
-								{/* 1 image only */}
-								<img
-									src={key?.image[0].img}
-									alt={key?.name}
-									className={`w-[100%] ${
-										key?.image?.length > 1 ? "hidden" : "block"
-									}`}
-								/>
+		<div className="w-full min-h-screen relative font-[GeologicaFont] bg-gradient-to-b from-gray-50 to-white">
+			<div className="w-full pt-8 pb-16">
+				<motion.h1
+					initial={{ opacity: 0, y: -20 }}
+					animate={{ opacity: 1, y: 0 }}
+					transition={{ duration: 0.6 }}
+					className="text-2xl sm:text-3xl md:text-4xl font-bold text-center text-gray-800">
+					<span className="text-[#018496]">{productList.length}</span> Products
+					Found
+				</motion.h1>
+				<motion.div
+					initial={{ width: 0 }}
+					animate={{ width: "100px" }}
+					transition={{ duration: 0.8, delay: 0.2 }}
+					className="h-1 bg-[#018496] rounded-full mx-auto mt-4"
+				/>
 
-								<div className="text-center text-black [@media(min-width:450px)]:pt-[10px] pt-[5px] [@media(min-width:450px)]:pb-[15px] pb-[5px] px-[7px]">
-									<p className="text-red-600 [@media(min-width:450px)]:text-[16px] text-[15px]">
-										({key?.title})
-									</p>
-									<p className="[@media(min-width:450px)]:text-[14px] text-[13px] text-justify [@media(min-width:450px)]:px-[10px] px-[5px] pt-[5px] ">
-										{key?.description}
-									</p>
+				<div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 w-[96%] mx-auto py-12">
+					{productList.map(product => (
+						<motion.div
+							key={product._id}
+							variants={cardVariants}
+							initial="hidden"
+							animate="visible"
+							whileHover="hover"
+							className="w-full max-w-[360px] bg-white rounded-xl shadow-lg overflow-hidden border border-gray-200 mx-auto">
+							{/* Slider for multiple images */}
 
-									<div className="flex justify-center pb-[10px] pt-[15px]">
-										<Link
-											to={`/superAdmin/product-solutions/update/${key?._id}`}>
-											<button className="text-white [@media(min-width:450px)]:text-[14px] text-[13px] bg-green-500 [@media(min-width:450px)]:py-2 py-[8px] [@media(min-width:450px)]:px-6 px-[20px] focus:outline-none rounded-[5px] mr-[15px]">
-												Edit
-											</button>
-										</Link>
-										<button
-											onClick={() => {
-												const confirmBox = window.confirm(
-													`Do you really want to delete (${key?.title}) product?`
-												);
-												{
-													confirmBox === true
-														? sethandleDeleteCrumb(key?._id)
-														: sethandleDeleteCrumb(false);
-												}
-											}}
-											className="text-white [@media(min-width:450px)]:text-[14px] text-[13px] bg-red-600 [@media(min-width:450px)]:py-2 py-[8px] [@media(min-width:450px)]:px-6 px-[20px] focus:outline-none rounded-[5px]">
-											Delete
-										</button>
-									</div>
+							<img
+								src={product.img}
+								alt={product.title}
+								className="w-full h-[200px] object-cover"
+							/>
+
+							{/* Product Details */}
+							<div className="text-center p-6">
+								<p className="text-[#c9EB61] text-base md:text-lg font-medium">
+									{product.title}
+								</p>
+								<p className="text-gray-700 text-sm md:text-base text-justify mt-2 line-clamp-3">
+									{product.description}
+								</p>
+
+								{/* Action Buttons */}
+								<div className="flex justify-center gap-4 mt-6">
+									<Link
+										to={`/superAdmin/product-solutions/update/${product._id}`}>
+										<motion.button
+											whileHover={{ scale: 1.05 }}
+											whileTap={{ scale: 0.95 }}
+											className="bg-[#018496] text-white text-sm md:text-base font-semibold py-2 px-6 rounded-lg hover:bg-[#016f80] transition-colors">
+											Edit
+										</motion.button>
+									</Link>
+									<motion.button
+										whileHover={{ scale: 1.05 }}
+										whileTap={{ scale: 0.95 }}
+										onClick={() => handleDeleteCrumb(product._id)}
+										className="bg-red-600 text-white text-sm md:text-base font-semibold py-2 px-6 rounded-lg hover:bg-red-700 transition-colors">
+										Delete
+									</motion.button>
 								</div>
 							</div>
-						);
-					})}
+						</motion.div>
+					))}
 				</div>
 			</div>
 		</div>
 	);
 };
 
-function NextButton(props) {
-	const { onClick } = props;
+function NextButton({ onClick }) {
 	return (
 		<div
-			className={`bg-[#dcdcdc] w-[20px] h-[50px] absolute top-[45%] right-0 [@media(min-width:450px)]:flex hidden items-center justify-center cursor-pointer z-10`}
+			className="bg-[#018496]/80 w-10 h-10 rounded-full absolute top-1/2 -translate-y-1/2 right-2 flex items-center justify-center cursor-pointer z-10 hover:bg-[#016f80]"
 			onClick={onClick}>
-			<MdKeyboardArrowRight className="text-[black] text-[27px]" />
+			<MdKeyboardArrowRight className="text-white text-2xl" />
 		</div>
 	);
 }
-function PrevButton(props) {
-	const { onClick } = props;
+
+function PrevButton({ onClick }) {
 	return (
 		<div
-			className={`bg-[#dcdcdc] w-[20px] h-[50px] absolute top-[45%] left-0 [@media(min-width:450px)]:flex hidden items-center justify-center cursor-pointer z-10`}
+			className="bg-[#018496]/80 w-10 h-10 rounded-full absolute top-1/2 -translate-y-1/2 left-2 flex items-center justify-center cursor-pointer z-10 hover:bg-[#016f80]"
 			onClick={onClick}>
-			<MdKeyboardArrowLeft className="text-[black] text-[27px]" />
+			<MdKeyboardArrowLeft className="text-white text-2xl" />
 		</div>
 	);
 }

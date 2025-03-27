@@ -1,4 +1,4 @@
-import Banner from "./Banner/Banner";
+import Hero from "./Hero/Hero";
 import LandAbout from "./LandAbout/LandAbout";
 import Branding from "./Branding/Branding";
 import Experience from "./Experience/Experience";
@@ -8,13 +8,18 @@ import WhyChooseUs from "./WhyChooseUs/WhyChooseUs";
 import Portfolio from "./Portfolio/Portfolio";
 import Testimonials from "./Testimonials/Testimonials";
 import FAQs from "./FAQs/FAQs";
-import OurNewsLetter from "./OurNewsLetter/OurNewsLetter";
+import NewsLetter from "./NewsLetter/NewsLetter";
+import PageTitle from "../../utils/PageTitle";
 
 const Home = () => {
 	return (
 		<main>
+			<PageTitle
+				title={"AR Labels: Garment Branding Specialist & Clothing Bespoke."}
+			/>
+
 			{/*  banner section  */}
-			<Banner />
+			<Hero />
 			{/* <Banner /> */}
 			{/* experience section  */}
 			<Experience />
@@ -35,7 +40,7 @@ const Home = () => {
 			{/* Branding section  */}
 			<Branding />
 			{/* Our News Letter section  */}
-			<OurNewsLetter />
+			<NewsLetter />
 
 			{/* footer section for landing page on the bottom */}
 			{/* <LandFooter /> */}

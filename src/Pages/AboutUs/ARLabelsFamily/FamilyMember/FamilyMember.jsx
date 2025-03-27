@@ -1,3 +1,5 @@
+import { motion } from "framer-motion";
+
 const teamMembers = [
 	{
 		id: 1,
@@ -29,46 +31,102 @@ const teamMembers = [
 ];
 
 function FamilyMember() {
-	const cardClass =
-		"w-[300px] h-[290px] mx-2 my-2 rounded-lg bg-white shadow-md flex flex-col items-center transition-transform duration-300 hover:scale-105";
-	const imgClass = "w-[105px] h-[105px] rounded-full overflow-hidden";
-	const textClass = "text-center mt-4 px-4";
-	const nameClass = "text-[18px] font-medium";
-	const titleClass = "text-red-600 text-[13px]";
-	const descriptionClass = "text-[13px] text-gray-600";
+	// Animation variants
+	const containerVariants = {
+		hidden: { opacity: 0 },
+		visible: { opacity: 1, transition: { staggerChildren: 0.2 } },
+	};
+
+	const cardVariants = {
+		hidden: { opacity: 0, y: 30 },
+		visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
+		hover: {
+			scale: 1.05,
+			boxShadow: "0 15px 30px rgba(1, 132, 150, 0.2)",
+			transition: { duration: 0.3 },
+		},
+	};
+
+	const textVariants = {
+		hidden: { opacity: 0, y: 10 },
+		visible: { opacity: 1, y: 0, transition: { duration: 0.4, delay: 0.2 } },
+	};
+
+	const underlineVariants = {
+		hidden: { width: 0 },
+		visible: { width: "100px", transition: { duration: 0.8, delay: 0.4 } },
+	};
 
 	return (
-		<main className="w-full h-full pt-16 pb-10 GeologicaFont bg-white">
-			<div className="xl:w-[1230px] w-[96%] mx-auto">
+		<main className="w-full py-20 bg-gradient-to-b from-gray-50 to-white font-[GeologicaFont]">
+			<div className="xl:w-[1230px] w-[96%] mx-auto px-6">
 				{/* Section Header */}
-				<div className="text-center text-black pb-6">
-					<h1 className="text-[22px] sm:text-[25px] md:text-[27px] lg:text-[30px] font-semibold">
-						Our Family
+				<motion.div
+					initial={{ opacity: 0, y: -20 }}
+					animate={{ opacity: 1, y: 0 }}
+					transition={{ duration: 0.6 }}
+					className="text-center text-gray-800 mb-12">
+					<h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold">
+						Our <span className="text-[#018496]">Family</span>
 					</h1>
-					<p className="text-[#018496] text-[14px] sm:text-[15px]">
+					<p className="text-[#c9EB61] text-lg md:text-xl mt-2 font-medium">
 						A Well-Seasoned Team At The Helm
 					</p>
-				</div>
+					<motion.div
+						variants={underlineVariants}
+						initial="hidden"
+						animate="visible"
+						className="h-1 bg-[#018496] rounded-full mx-auto mt-4"
+					/>
+				</motion.div>
 
 				{/* Team Members */}
-				<div className="flex flex-wrap justify-center">
+				<motion.div
+					variants={containerVariants}
+					initial="hidden"
+					animate="visible"
+					className="flex flex-wrap justify-center gap-8">
 					{teamMembers.map(member => (
-						<div key={member.id} className={cardClass}>
-							<div className={imgClass}>
-								<img
+						<motion.div
+							key={member.id}
+							variants={cardVariants}
+							whileHover="hover"
+							className="w-[320px] bg-white rounded-xl shadow-lg overflow-hidden flex flex-col items-center transition-all duration-300 group relative">
+							{/* Image */}
+							<div className="relative w-full h-[200px]">
+								<motion.img
 									src={member.image}
 									alt={member.name}
-									className="w-full h-full object-cover"
+									className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+									initial={{ scale: 1 }}
+									whileHover={{ scale: 1.1 }}
 								/>
+								{/* Overlay */}
+								<div className="absolute inset-0 bg-gradient-to-t from-[#018496]/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
 							</div>
-							<div className={textClass}>
-								<h3 className={nameClass}>{member.name}</h3>
-								<p className={titleClass}>{member.title}</p>
-								<p className={descriptionClass}>{member.description}</p>
-							</div>
-						</div>
+
+							{/* Text Content */}
+							<motion.div variants={textVariants} className="text-center p-6">
+								<h3 className="text-xl md:text-2xl font-semibold text-gray-800 group-hover:text-[#018496] transition-colors duration-300">
+									{member.name}
+								</h3>
+								<p className="text-[#c9EB61] text-sm md:text-base font-medium mt-1">
+									{member.title}
+								</p>
+								<p className="text-gray-600 text-sm md:text-base mt-2 leading-relaxed">
+									{member.description}
+								</p>
+							</motion.div>
+
+							{/* Decorative Border */}
+							<motion.div
+								className="absolute inset-0 border-2 border-[#018496] rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+								initial={{ opacity: 0 }}
+								whileHover={{ opacity: 1 }}
+							/>
+						</motion.div>
 					))}
-				</div>
+				</motion.div>
 			</div>
 		</main>
 	);

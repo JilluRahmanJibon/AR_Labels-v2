@@ -5,7 +5,6 @@ import ErrorPage from "../components/Errorpage/Errorpage";
 import Home from "../Pages/Home/Home";
 import ContactUs from "../Pages/ContactUs/ContactUs";
 import { lazy, Suspense } from "react";
-import BSection from "../Pages/Admin/Banner/BSection";
 
 // Lazy Load Components for Better Performance
 const OurCompany = lazy(() => import("../Pages/AboutUs/OurCompany/OurCompany"));
@@ -105,11 +104,14 @@ const router = createBrowserRouter([
 				element: withSuspense(<ClientReferences />),
 			},
 			// Products
-			{ path: "/products/:pid", element: withSuspense(<Product />) },
 			{
-				path: "/:pCategory",
+				path: "/products",
+				element: withSuspense(<Product />),
+			},
+			{
+				path: "/product/:pCategory",
 				element: withSuspense(<ProductDetails />),
-				loader: productDetailsLoader, // Validates pCategory
+				loader: productDetailsLoader,
 			},
 			// News Events
 			{ path: "/news-events", element: withSuspense(<NewsEvents />) },
@@ -134,7 +136,6 @@ const router = createBrowserRouter([
 		errorElement: <ErrorPage />,
 		children: [
 			{ path: "dashboard", element: withSuspense(<Dashboard />) }, // Relative path
-			{ path: "banner", element: withSuspense(<BSection />) },
 			{
 				path: "product-solutions/all-products",
 				element: withSuspense(<AllProducts />),

@@ -1,115 +1,102 @@
-import { useEffect } from "react";
-import { Link, useParams } from "react-router-dom";
-import { useQuery } from "@tanstack/react-query";
-import Spinner from "../../components/Loader/Spinner";
-import { BaseURL } from "../../utils/BaseURL";
-import DynamicSlider from "../../Shared/DynamicSlider/DynamicSlider";
-
-// Fetch all products
-const fetchAllProducts = async () => {
-	try {
-		const res = await fetch(`${BaseURL}/products/`);
-		if (!res.ok) throw new Error("Failed to fetch products");
-		return res.json();
-	} catch (error) {
-		console.error("Error fetching all products:", error);
-		return { data: [] }; // Empty fallback
-	}
-};
-
-// Fetch single product by ID
-const fetchSingleProduct = async id => {
-	try {
-		const res = await fetch(`${BaseURL}/products/${id}`);
-		if (!res.ok) throw new Error("Failed to fetch product");
-		return res.json();
-	} catch (error) {
-		console.error(`Error fetching product ${id}:`, error);
-		return { data: null }; // Empty fallback
-	}
-};
+import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
+import { categories } from "./PCategory"; // Assuming categories is an array of { category, img, title }
+import PageTitle from "../../utils/PageTitle";
 
 const Product = () => {
-	const { pid } = useParams();
+	// Animation variants
+	const containerVariants = {
+		hidden: { opacity: 0 },
+		visible: {
+			opacity: 1,
+			transition: { staggerChildren: 0.1, delayChildren: 0.2 },
+		},
+	};
 
-	// Fetch product list
-	const { isLoading: isLoadingAll, data: products } = useQuery({
-		queryKey: ["products"],
-		queryFn: fetchAllProducts,
-	});
+	const cardVariants = {
+		hidden: { opacity: 0, y: 20 },
+		visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
+		hover: {
+			scale: 1.05,
+			boxShadow: "0 15px 30px rgba(1, 132, 150, 0.2)",
+			transition: { duration: 0.3 },
+		},
+	};
 
-	// Fetch individual product details
-	const { isLoading: isLoadingSingle, data: product } = useQuery({
-		queryKey: ["product", pid],
-		queryFn: () => fetchSingleProduct(pid),
-		enabled: !!pid, // Fetch only if `pid` exists
-	});
-
-	useEffect(() => {
-		// Scroll to the top on change of product ID
-		window.scrollTo(0, 0);
-	}, [pid]);
-
-	if (isLoadingAll || isLoadingSingle) {
-		return <Spinner />;
-	}
+	const textVariants = {
+		hidden: { opacity: 0, y: 10 },
+		visible: { opacity: 1, y: 0, transition: { duration: 0.4, delay: 0.2 } },
+		hover: { scale: 1.1, color: "#c9EB61" }, // Lime green for contrast
+	};
 
 	return (
-		<section className="max-w-[1920px] mx-auto GeologicaFont">
-			{/* Slider Section */}
-			<div>
-				<DynamicSlider slides={product?.data?.image ?? []} />
-			</div>
+		<section className="xl:w-[1400px] mx-auto py-16 px-6 bg-gradient-to-b from-gray-50 to-white">
+			<PageTitle title={"Products || AR Labels & Trims Ltd."} />
+			{/* Section Header */}
+			<motion.div
+				initial={{ opacity: 0, y: -20 }}
+				animate={{ opacity: 1, y: 0 }}
+				transition={{ duration: 0.6 }}
+				className="text-center mb-12">
+				<h2 className="text-4xl md:text-5xl font-extrabold text-gray-800 tracking-tight">
+					Explore Our <span className="text-[#018496]">Premium Products</span>
+				</h2>
+				<p className="text-lg md:text-xl text-gray-600 mt-4 max-w-2xl mx-auto">
+					Discover innovative solutions designed to elevate your brand with
+					style and sustainability.
+				</p>
+				<motion.div
+					initial={{ width: 0 }}
+					animate={{ width: "100px" }}
+					transition={{ duration: 0.8, delay: 0.4 }}
+					className="h-1 bg-[#018496] rounded-full mx-auto mt-4"
+				/>
+			</motion.div>
 
-			{/* Product Details Section */}
-			<div className="py-6 [@media(min-width:850px)]:px-12 px-[0px]">
-				<div className="[@media(min-width:850px)]:px-[0px] px-[1rem]">
-					<h2 className="[@media(min-width:460px)]:text-[22px] text-[18px] font-semibold [@media(min-width:850px)]:pb-[5px] pb-0 text-gray-800">
-						{product?.data?.title}
-					</h2>
-					<p className="[@media(min-width:850px)]:text-[16px] [@media(min-width:600px)]:text-[15px] [@media(min-width:400px)]:text-[14px] text-[13px]">
-						{product?.data?.description}
-					</p>
-				</div>
+			{/* Product Grid */}
+			<motion.div
+				variants={containerVariants}
+				initial="hidden"
+				animate="visible"
+				className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+				{categories.map((category, index) => (
+					<motion.div
+						key={index}
+						variants={cardVariants}
+						whileHover="hover"
+						className="relative group overflow-hidden rounded-xl shadow-lg">
+						<Link to={`/product/${category.category}`}>
+							{/* Product Image */}
+							<motion.img
+								src={category.img}
+								alt={category.title}
+								className="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-110"
+								initial={{ scale: 1 }}
+								whileHover={{ scale: 1.1 }}
+							/>
 
-				{/* Product Showcase */}
-				<div className="w-full py-6 [@media(min-width:850px)]:px-[0px] px-[1rem]">
-					<div className="w-full flex flex-wrap items-center pb-6">
-						<h2 className="sm:!text-[30px] [@media(min-width:460px)]:text-[26px] text-[20px] font-semibold text-[#2C3E50] pr-[10px]">
-							<span className="text-black">Our</span> Products
-						</h2>
-						<p className="[@media(min-width:595px)]:text-[16px] [@media(min-width:400px)]:text-[14px] text-[13px] [@media(min-width:595px)]:pt-[7px] pt-0 text-left">
-							(Delivering Brand Identification Solutions)
-						</p>
-					</div>
-					<div className="border-b border-dashed border-black">
-						<div className="w-[70px] h-[3px] bg-black"></div>
-					</div>
-
-					<div className="flex flex-wrap w-[100%] mx-auto justify-center py-[2rem]">
-						{products?.data?.map(productItem => (
-							<div
-								key={productItem?._id}
-								className="[@media(min-width:450px)]:w-[360px] [@media(min-width:370px)]:w-[330px] w-[300px] h-[260px] [@media(min-width:450px)]:mx-[10px] mx-0 my-[10px] rounded-[10px] overflow-hidden border-[2px] border-[#ececec] bg-[#ffffff] relative">
-								<Link to={`/products/${productItem?._id}`}>
-									{productItem?.image?.[0] && (
-										<img
-											src={productItem?.image?.[0]?.img}
-											alt={productItem?.title}
-											className="w-[100%] h-[12rem] object-cover object-center block"
-										/>
-									)}
-								</Link>
-								<div className="text-center text-black px-[5px] absolute bottom-[10px] left-0 right-0">
-									<p className="text-red-600 [@media(min-width:450px)]:text-[16px] text-[15px]">
-										{productItem?.title}
-									</p>
-								</div>
+							{/* Overlay */}
+							<div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent opacity-90 group-hover:opacity-100 transition-opacity duration-300 flex items-end justify-center">
+								<motion.p
+									variants={textVariants}
+									initial="hidden"
+									animate="visible"
+									whileHover="hover"
+									className="text-white font-semibold text-lg md:text-xl p-6 w-full truncate text-center">
+									{category.title}
+								</motion.p>
 							</div>
-						))}
-					</div>
-				</div>
-			</div>
+
+							{/* Decorative Hover Border */}
+							<motion.div
+								className="absolute inset-0 border-2 border-[#018496] rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+								initial={{ opacity: 0 }}
+								whileHover={{ opacity: 1 }}
+							/>
+						</Link>
+					</motion.div>
+				))}
+			</motion.div>
 		</section>
 	);
 };

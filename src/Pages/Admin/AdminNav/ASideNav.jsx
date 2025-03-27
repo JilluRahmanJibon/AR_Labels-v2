@@ -15,10 +15,6 @@ const ASideNav = ({ data }) => {
 
 	const menuItemsDashboard = [
 		{
-			name: "Banner Management",
-			subItems: [{ name: "Banner", path: `/${data?.role}/banner` }],
-		},
-		{
 			name: "Product & Solutions",
 			subItems: [
 				{

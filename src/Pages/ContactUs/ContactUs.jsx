@@ -1,9 +1,11 @@
 import DynamicBanner from "../../Shared/DynamicBanner/DynamicBanner";
 import ContactMap from "./ContactMap/ContactMap";
-import OurNewsLetter from "../Home/OurNewsLetter/OurNewsLetter";
 import ContactInfo from "./ContactInfo/ContactInfo";
+import PageTitle from "../../utils/PageTitle";
 
-const ContactUs = () => {
+const ContactUs = () =>
+{
+	<PageTitle title={"Contact Us|| AR Labels & Trims LTD."} />;
 	return (
 		<div>
 			{/*  banner section  */}

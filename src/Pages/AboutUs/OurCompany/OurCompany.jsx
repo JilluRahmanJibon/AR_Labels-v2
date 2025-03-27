@@ -1,24 +1,23 @@
 import { Suspense, lazy } from "react";
 import DynamicBanner from "../../../Shared/DynamicBanner/DynamicBanner";
 import Spinner from "../../../components/Loader/Spinner";
+import PageTitle from "../../../utils/PageTitle";
 
 // Lazy load components
-const AboutSkils = lazy(() => import("./AboutSkils/AboutSkils"));
-const OurCompanyDetails = lazy(() =>
-	import("./OurCompanyDetails/OurCompanyDetails")
-);
+const OurCompanyDetails = lazy(() => import("./OurCompanyDetails"));
 
 function OurCompany() {
 	return (
 		<main>
+			<PageTitle title={'Our Company || AR Labels & Trims Ltd.'}/>
 			{/*  banner section  */}
 			<DynamicBanner
-				webTittle={true}
+				tittle="Our Company"
+				webTittle={false}
 				bg="https://www.arltl.com/web-cms-arltl/uploads/about-banner.jpg"
 			/>
 			{/*  skils and company details sections */}
 			<Suspense fallback={<Spinner />}>
-				<AboutSkils />
 				<OurCompanyDetails />
 			</Suspense>
 		</main>

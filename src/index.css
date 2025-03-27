@@ -1,45 +1,64 @@
 @import "tailwindcss";
 /* Custom Pagination */
+.custom-pagination {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin-top: 1.5rem;
+}
+
 .custom-pagination .swiper-pagination-bullet {
-  width: 100%; /* Full width for a sleek bar effect */
-  height: 4px; /* Slightly thicker for visibility */
-  background-color: #ffffff; /* White for contrast against dark background */
-  margin: 0 6px !important; /* Increased spacing for a cleaner look */
-  border-radius: 2px; /* Subtle rounding */
-  transition: all 0.3s ease-in-out; /* Smooth transition */
+	width: 100%; /* Fixed width for each bullet */
+	height: 4px; /* Thin line height */
+	background-color: #ffffff; /* White for inactive bullets */
+	margin: 0 !important; /* No gaps between bullets */
+	border-radius: 0; /* No rounding for a straight line */
+	transition: background-color 0.3s ease-in-out; /* Smooth color transition */
 }
 
 .custom-pagination .swiper-pagination-bullet-active {
-  background-color: #018496; /* Your primary teal color for active state */
-  border-bottom: none; /* Removed border-bottom as it’s not needed */
-  transform: scale(1.2); /* Slight scale-up for emphasis */
-  margin: 0 6px !important; /* Consistent spacing */
+	background-color: #018496; /* Active bullet in teal */
+	position: relative; /* For pseudo-element positioning */
 }
 
+.custom-pagination .swiper-pagination-bullet-active::after {
+	content: "";
+	position: absolute;
+	bottom: -4px; /* Position underline below the bullet */
+	left: 0;
+	width: 100%; /* Full width of the bullet */
+	height: 2px; /* Thin underline */
+	background-color: #018496; /* Teal underline */
+}
 /* Custom Navigation Buttons */
 .swiper-button-next::after,
 .swiper-button-prev::after {
-  font-size: 14px !important; /* Slightly larger for better visibility */
-  color: #ffffff; /* White text/icons */
-  background-color: rgba(75, 85, 99, 0.9); /* Gray-700 with slight transparency */
-  border-radius: 50%; /* Circular buttons */
-  padding: 18px; /* Increased padding for a larger, more clickable area */
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3); /* Subtle shadow for depth */
-  transition: background-color 0.3s ease, transform 0.2s ease; /* Smooth hover effects */
+	font-size: 14px !important; /* Slightly larger for better visibility */
+	color: #ffffff; /* White text/icons */
+	background-color: rgba(
+		75,
+		85,
+		99,
+		0.9
+	); /* Gray-700 with slight transparency */
+	border-radius: 50%; /* Circular buttons */
+	padding: 18px; /* Increased padding for a larger, more clickable area */
+	box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3); /* Subtle shadow for depth */
+	transition: background-color 0.3s ease, transform 0.2s ease; /* Smooth hover effects */
 }
 
 /* Hover Effects for Navigation Buttons */
 .swiper-button-next:hover::after,
 .swiper-button-prev:hover::after {
-  background-color: #018496; /* Your primary teal color on hover */
-  transform: scale(1.1); /* Slight scale-up on hover */
+	background-color: #018496; /* Your primary teal color on hover */
+	transform: scale(1.1); /* Slight scale-up on hover */
 }
 
 /* Margin Adjustments for Positioning */
 .swiper-button-next::after {
-  margin-left: 40px; /* Pushes the next button away from the edge */
+	margin-left: 40px; /* Pushes the next button away from the edge */
 }
 
 .swiper-button-prev::after {
-  margin-right: 40px; /* Pushes the prev button away from the edge */
+	margin-right: 40px; /* Pushes the prev button away from the edge */
 }

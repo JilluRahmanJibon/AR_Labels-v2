@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 
-function OurNewsLetter() {
+function NewsLetter() {
 	// Animation variants
 	const sectionVariants = {
 		hidden: { opacity: 0, scale: 0.9 },
@@ -138,4 +138,4 @@ function OurNewsLetter() {
 	);
 }
 
-export default OurNewsLetter;
+export default NewsLetter;

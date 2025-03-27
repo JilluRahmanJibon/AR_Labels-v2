@@ -80,7 +80,7 @@ const NavTop = ({ user }) => {
 								to={`${user?.role}/dashboard`}
 								className="flex items-center text-white hover:text-[#c9EB61] transition-colors duration-300">
 								<FaUserCheck className="text-xl md:text-2xl mr-2" />
-								<span className="text-sm hover:text-[#018496] md:text-base font-semibold">
+								<span className="text-sm  md:text-base font-semibold">
 									Profile
 								</span>
 							</Link>
@@ -89,7 +89,7 @@ const NavTop = ({ user }) => {
 								to="/login"
 								className="flex items-center text-white hover:text-[#c9EB61] transition-colors duration-300">
 								<FaRegUserCircle className="text-xl md:text-2xl mr-2" />
-								<span className="text-sm hover:text-[#018496] md:text-base font-semibold">
+								<span className="text-sm md:text-base font-semibold">
 									Existing Customers
 								</span>
 							</Link>

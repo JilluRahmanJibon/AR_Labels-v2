@@ -1,5 +1,5 @@
 import DynamicBanner from "../../Shared/DynamicBanner/DynamicBanner";
-import CertificationsData from "./CertificationsData/CertificationsData";
+import CertificationsDetails from "./CertificationsDetails/CertificationsDetails";
 
 const Certifications = () => {
 	return (
@@ -11,7 +11,7 @@ const Certifications = () => {
 			/>
 
 			{/* Certifications Section */}
-			<CertificationsData />
+			<CertificationsDetails />
 		</div>
 	);
 };
